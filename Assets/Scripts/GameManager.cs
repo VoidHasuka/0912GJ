@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [Header("Game Settings")]
     [Tooltip("游戏设置相关")]
     public float expendSpeed = 5f; // 声波扩散速度
+    public float LifeTime = 7f; //声波存在时间
 
 
     [Header("Managers")]

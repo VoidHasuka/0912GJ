@@ -14,15 +14,10 @@ public class SoundSource : MonoBehaviour
     public bool playAudioOnEmit = true;
 
     [Header("Wave Settings")]
-    public Transform waveVisual;               // 波纹对象的Transform
+    public GameObject wavePrefab;              // 声波可视化预制体
     public float originalRadius = 0.1f;        // 初始扩散半径，当发射器较大时可调大，以保证从表面开始扩散
     public float maxRadius = 10f;              // 最大扩散半径
-    private float expandSpeed;                 // 半径扩散速度（单位：单位/秒），由GameManager控制
-    public LayerMask receiverLayer;            // 接收器所在层（可选：留空代表全部）
     public WaveType waveType;                  // 声波类型
-    //public float hitCooldownPerReceiver = 0.2f;// 同一接收器命中去抖，暂未使用
-
-
 
     //注册到SoundSourceManager中
     private void Start()
@@ -32,80 +27,30 @@ public class SoundSource : MonoBehaviour
             GameManager.Instance.soundSourceManager.soundSources.Add(this);
             //Debug.Log("注册声源:" + this.name);
         }
-        //初始化声波速度
-        expandSpeed = GameManager.Instance.expendSpeed;
     }
 
     // 运行时存储碰撞体，避免重复触发
     private HashSet<Collider2D> _hitThisPulse = new HashSet<Collider2D>();
 
     // 播放声音并开始扩散
-    public void Emit()
+    // 发射声波：供UI按钮调用
+    public void EmitWave()
     {
-        if (playAudioOnEmit && audioSource != null)
+        if (wavePrefab == null)
         {
-            audioSource.Play(); // 播放声音
+            Debug.LogWarning("WaveEmitter: 未设置 wavePrefab 引用！");
+            return;
         }
-        StopAllCoroutines();
-        StartCoroutine(EmitRoutine());
-    }
-
-    //协程扩散
-    private IEnumerator EmitRoutine()
-    {
-
-        _hitThisPulse.Clear();
-        float radius = 0f;
-
-        // 可视化初始化
-        if (waveVisual != null) waveVisual.localScale = Vector3.zero;
-
-        while (radius < maxRadius)
+        // 在声源位置生成波段对象
+        GameObject waveObj = Instantiate(wavePrefab, transform.position, Quaternion.identity);
+        // 可选：设置波段对象的标记，便于接收器识别
+        waveObj.tag = "Wave";
+        // 初始化波段（非反射，正常波）
+        WaveSegment waveSegment = waveObj.GetComponent<WaveSegment>();
+        if (waveSegment != null)
         {
-            radius += expandSpeed * Time.deltaTime;
-
-            // 1) 命中检测：当前半径内的所有 Collider2D
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius, receiverLayer);
-            // 说明：OverlapCircleAll 会返回圆内所有2D碰撞体。频繁使用可考虑 NonAlloc 版本优化。:contentReference[oaicite:5]{index=5}
-
-            foreach (var col in hits)
-            {
-
-                if (_hitThisPulse.Contains(col)) continue; // 避免本次脉冲重复触发
-                //Debug.Log("接受");
-                _hitThisPulse.Add(col);
-
-                // 通知接收器
-                var receiver = col.GetComponent<Receiver>();
-                if (receiver != null)
-                {
-                    receiver.OnHeard(gameObject); //触发接收器接受检测并把“声源对象”传给接收器
-                }
-            }
-
-            // 2) 可视化：缩放一个圆形Sprite/圆环
-            if (waveVisual != null)
-            {
-                float visualScale = radius * 2f; // 假设贴图单位直径=1，这里把scale按直径算
-                waveVisual.localScale = new Vector3(visualScale, visualScale, 1f);
-            }
-
-            yield return null; // 下一帧继续扩散
+            waveSegment.isReflection = false;
+            // 可根据需要设置波段扩散速度等参数，这里使用预制体默认值
         }
-
-        // 可选：扩散结束后隐藏可视化
-        if (waveVisual != null) waveVisual.localScale = Vector3.zero;
-    }
-
-    // 可选：支持“延时发声”
-    public void EmitWithDelay(float delaySeconds)
-    {
-        StartCoroutine(EmitDelay(delaySeconds));
-    }
-
-    private IEnumerator EmitDelay(float t)
-    {
-        yield return new WaitForSeconds(t); // 协程里等待 t 秒（受 Time.timeScale 影响）。:contentReference[oaicite:6]{index=6}
-        Emit();
     }
 }

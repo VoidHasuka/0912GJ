@@ -23,7 +23,7 @@ public class SoundSourceManager
         {
             if(source!=null)
             {
-                source.Emit();
+                source.EmitWave();
             }
         }
     }

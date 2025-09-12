@@ -30,6 +30,7 @@ public class UIManager
                 ui.Destroy();
             }
         }
+        uiList.Clear();
     }
 
     //开始菜单UI

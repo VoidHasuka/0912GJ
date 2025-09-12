@@ -1,59 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-/// <summary>
-/// 接收器
-/// </summary>
 public class Receiver : MonoBehaviour
 {
-    [Header("Visual Reaction")]
-    public Renderer targetRenderer;     // 2D 可用 SpriteRenderer 也能拿到 .material
-    public string expectedSourceTag = "SoundSource"; //声源标签
+    private SpriteRenderer sr;
+    // 碰撞进入时的反馈颜色
+    public Color triggeredColor = Color.red;
+    // 原始颜色
+    private Color originalColor;
 
-    Color _origColor;
-    float _flashTime = 0.2f;
-    float _timer;
-
-    void Awake()
+    void Start()
     {
-        if (targetRenderer == null) targetRenderer = GetComponent<Renderer>();
-        if (targetRenderer != null) _origColor = targetRenderer.material.color; 
+        sr = GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            originalColor = sr.color;
+        }
     }
 
-    // 声源在扩散时调用
-    public void OnHeard(GameObject source)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-
-
-        //Debug.Log("Receiver heard from " + source.name);
-
-        // 识别标签：比起直接比较 .tag，官方推荐 CompareTag（性能更好/更安全）。
-        // 确保触发对象不为空且标签匹配为声源
-        bool tagMatched = source != null && source.CompareTag(expectedSourceTag);
-
-        // 做点反馈：比如闪一下颜色
-        if (tagMatched)
+        // 检查进入触发范围的对象是否是波段（通过Tag识别）
+        if (other.CompareTag("Wave"))
         {
-            if (targetRenderer != null)
+            Debug.Log($"{name} 收到了波段碰撞: {other.name}");
+            if (sr != null)
             {
-                targetRenderer.material.color = tagMatched ? Color.green : Color.yellow;
-                _timer = _flashTime;
+                // 将接收器着色为反馈颜色
+                sr.color = triggeredColor;
+                // 短暂延时后恢复原色
+                Invoke(nameof(ResetColor), 0.5f);
             }
         }
-
-        //Debug.Log($"Receiver heard! Source = {source?.name}, TagOK = {tagMatched}, Tag = {source?.tag}");
     }
 
-    void Update()
+    void ResetColor()
     {
-        if (_timer > 0f && targetRenderer != null)
+        if (sr != null)
         {
-            _timer -= Time.deltaTime;
-            if (_timer <= 0f)
-            {
-                targetRenderer.material.color = _origColor;
-            }
+            sr.color = originalColor;
         }
     }
 }

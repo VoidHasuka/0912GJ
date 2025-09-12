@@ -16,6 +16,5 @@ public class UIBase
     {
         //基础销毁
         GameObject.Destroy(uiGo);
-        GameManager.Instance.uiManager.uiList.Remove(this);
     }
 }

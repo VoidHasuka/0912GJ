@@ -10,8 +10,21 @@ public class SoundSourceManager
     //所有声源
     public List<SoundSource> soundSources = new List<SoundSource>();
 
+    //初始化列表
     public void Init()
     {
         soundSources = new List<SoundSource>();
+    }
+
+    //声源发射
+    public void EmitAll()
+    {
+        foreach(var source in soundSources)
+        {
+            if(source!=null)
+            {
+                source.Emit();
+            }
+        }
     }
 }

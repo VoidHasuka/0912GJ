@@ -86,6 +86,8 @@ public class UIManager
         //实例化局内游戏UI
         UIBase backButton = new UIBase("BackButton");
         UIBase musicCheckUI = new UIBase("MusicCheckUI");
+
+        UIBase resetButton = new UIBase("ResetButton");
     }
 
     //返回确认UI

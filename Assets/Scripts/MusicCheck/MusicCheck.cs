@@ -111,8 +111,12 @@ public class MusicCheck : MonoBehaviour
     public void ResetInput()
     {
         inputList.Clear();
+        ClearInputUI();
         Timer = 0f;
         allowTimerStart = false;
+
+        //位置设定
+        phigrosLine.transform.localPosition = new Vector3(-400, 0, 0);
     }
 
 

@@ -68,8 +68,6 @@ public class ButtonEvent : MonoBehaviour
         }
     }
 
-
-
     //重置MusicCheck
     public void OnClickResetMusicCheck()
     {

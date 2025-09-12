@@ -9,7 +9,7 @@ public class Receiver : MonoBehaviour
 {
     [Header("Visual Reaction")]
     public Renderer targetRenderer;     // 2D 可用 SpriteRenderer 也能拿到 .material
-    public string expectedSourceTag = "Player"; // 你想识别的声源标签
+    public string expectedSourceTag = "SoundSource"; //声源标签
 
     Color _origColor;
     float _flashTime = 0.2f;
@@ -26,19 +26,23 @@ public class Receiver : MonoBehaviour
     {
 
 
-        Debug.Log("Receiver heard from " + source.name);
+        //Debug.Log("Receiver heard from " + source.name);
 
-        // 识别标签：比起直接比较 .tag，官方推荐 CompareTag（性能更好/更安全）。:contentReference[oaicite:9]{index=9}
+        // 识别标签：比起直接比较 .tag，官方推荐 CompareTag（性能更好/更安全）。
+        // 确保触发对象不为空且标签匹配为声源
         bool tagMatched = source != null && source.CompareTag(expectedSourceTag);
 
-        // 做点反馈：比如闪一下颜色并在 Console 打印信息
-        if (targetRenderer != null)
+        // 做点反馈：比如闪一下颜色
+        if (tagMatched)
         {
-            targetRenderer.material.color = tagMatched ? Color.green : Color.yellow;
-            _timer = _flashTime;
+            if (targetRenderer != null)
+            {
+                targetRenderer.material.color = tagMatched ? Color.green : Color.yellow;
+                _timer = _flashTime;
+            }
         }
 
-        Debug.Log($"Receiver heard! Source = {source?.name}, TagOK = {tagMatched}, Tag = {source?.tag}");
+        //Debug.Log($"Receiver heard! Source = {source?.name}, TagOK = {tagMatched}, Tag = {source?.tag}");
     }
 
     void Update()

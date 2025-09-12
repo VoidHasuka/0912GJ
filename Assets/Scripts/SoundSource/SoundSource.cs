@@ -22,11 +22,11 @@ public class SoundSource : MonoBehaviour
     public bool playAudioOnEmit = true;
 
     [Header("Wave Settings")]
-    public Transform waveVisual;               // 可选：波纹可视化节点（圆形Sprite/LineRenderer根）
+    public Transform waveVisual;               // 可选：波纹可视化节点（圆形Sprite/LineRenderer根） 波纹对象的Transform
     public float maxRadius = 10f;              // 最大扩散半径
     public float expandSpeed = 8f;             // 半径扩散速度（单位：单位/秒）
     public LayerMask receiverLayer;            // 接收器所在层（可选：留空代表全部）
-    public float hitCooldownPerReceiver = 0.2f;// 同一接收器命中去抖
+    public float hitCooldownPerReceiver = 0.2f;// 同一接收器命中去抖，暂未使用
 
     // 运行时存储碰撞体，避免重复触发
     private HashSet<Collider2D> _hitThisPulse = new HashSet<Collider2D>();

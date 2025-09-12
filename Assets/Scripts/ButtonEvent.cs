@@ -18,6 +18,15 @@ public class ButtonEvent : MonoBehaviour
     {
         GameManager.Instance.ChangeGameState(GameState.Level);
     }
+    //进入关卡
+    public void OnClickEnterLevel(int index)
+    {
+        GameManager.Instance.ChangeGameState(GameState.Play);
+        //依据index加载关卡
+        //GameManager.Instance.InvokeAfterDelay(() => GameManager.Instance.InitLevel(index), 0.1f);
+        GameManager.Instance.InitLevel(index);
+
+    }
 
     //引出确认界面
     public void OnClickBackNotSure()
@@ -57,5 +66,13 @@ public class ButtonEvent : MonoBehaviour
                 // 已在开始菜单，可根据需求添加退出或提示
                 break;
         }
+    }
+
+
+
+    //重置MusicCheck
+    public void OnClickResetMusicCheck()
+    {
+        GameManager.Instance.musicCheck.ResetInput();
     }
 }

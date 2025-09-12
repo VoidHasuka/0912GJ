@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,19 @@ public enum GameState
    Play,
    End
 }
+[System.Serializable]
+public struct PassWord
+{
+    public int levelIndex;
+    public List<WaveAndTime> levelPassWord;
+}
+[System.Serializable]
+public struct WaveAndTime
+{
+    public WaveType waveType;
+    public float time;
+}
+
 
 public class GameManager : MonoBehaviour
 {
@@ -25,9 +39,11 @@ public class GameManager : MonoBehaviour
     [Tooltip("游戏设置相关")]
     public float expendSpeed = 5f; // 声波扩散速度
     public float LifeTime = 7f; //声波存在时间
+    public PasswordSO passwordSO; //密码数据
 
     [Header("Game State")]
     public GameState currentState;
+    public MusicCheck musicCheck;
 
     [Header("Managers")]
     [Tooltip("游戏中各个管理器的实例，方便全局访问，由GameManager自动创建")]
@@ -85,7 +101,7 @@ public class GameManager : MonoBehaviour
             case GameState.Play:
 
                 // 进入游戏玩法状态的逻辑
-
+                uiManager.BasicGameUI();
 
                 break;
             case GameState.End:
@@ -98,5 +114,29 @@ public class GameManager : MonoBehaviour
                 Debug.LogWarning("未知的游戏状态: " + newState);
                 break;
         }
+    }
+
+    //根据index加载关卡
+    public void InitLevel(int index)
+    {
+        foreach(var pw in passwordSO.passWords)
+        {
+            if(pw.levelIndex==index)
+            {
+                musicCheck.Init(pw.levelPassWord, index);
+                return;
+            }
+        }
+        musicCheck.Init(null, index);
+    }
+
+    //传入事件与时间，在指定时间后触发事件
+    public void InvokeAfterDelay(System.Action action, float delay)
+    {
+        // 使用DOTween的延时回调
+        DOVirtual.DelayedCall(delay, () =>
+        {
+            action?.Invoke();
+        });
     }
 }

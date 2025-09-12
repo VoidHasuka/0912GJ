@@ -34,6 +34,8 @@ public class UIManager
             }
         }
         uiList.Clear();
+
+        //清理一些不在列表中的UI
     }
 
     //开始菜单UI
@@ -66,7 +68,7 @@ public class UIManager
         //实例化关卡菜单UI
         UIBase backButton = new UIBase("BackButton");
 
-        //UIBase level_1Button = new UIBase("Level_1Button");
+        UIBase level_1Button = new UIBase("Level_1Button");
     }
 
     //局内游戏UI

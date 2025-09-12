@@ -16,6 +16,9 @@ public class UIBase
     public void Destroy()
     {
         //基础销毁
-        GameObject.Destroy(uiGo);
+        if (uiGo != null)
+        {
+            GameObject.Destroy(uiGo);
+        }
     }
 }

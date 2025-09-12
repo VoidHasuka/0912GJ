@@ -20,6 +20,9 @@ public class SoundWave : MonoBehaviour
     [Header("Spawn Offset (optional)")]
     public Vector3 localSpawnOffset = Vector3.zero; // 如需略微前移可设这里
 
+    [Header("序号")]
+    public int Level;
+
     private void Start()
     {
         GameManager.Instance.soundSourceManager.soundSources.Add(this);

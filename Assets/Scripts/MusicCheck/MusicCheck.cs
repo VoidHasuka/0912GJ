@@ -128,6 +128,13 @@ public class MusicCheck : MonoBehaviour
         //比对时间是否正确，若正确则加入输入器，absult为绝对正确时间
         if (passwordList == null) return;
         float absultTime = passwordList[inputIndex].time;
+
+        //创建UI
+        Transform parentTf = GameObject.Find("Input").transform;
+        var Go = GameObject.Instantiate(Resources.Load<GameObject>("UI/word" + waveType), parentTf);
+        Go.transform.localPosition = new Vector3(-400 + Timer / maxTime * 800, 0, 0);
+        inputGoList.Add(Go);
+
         if (absultTime-faultToleranceTime/2 <= Timer && Timer <= absultTime + faultToleranceTime / 2)
         {
             //时间正确，加入输入器
@@ -144,11 +151,7 @@ public class MusicCheck : MonoBehaviour
 
             }
 
-            //创建UI
-            Transform parentTf = GameObject.Find("Input").transform;
-            var Go = GameObject.Instantiate(Resources.Load<GameObject>("UI/word" + waveType), parentTf);
-            Go.transform.localPosition = new Vector3(-400 + Timer / maxTime * 800, 0, 0);
-            inputGoList.Add(Go);
+           
         }
         //时间错误
         else

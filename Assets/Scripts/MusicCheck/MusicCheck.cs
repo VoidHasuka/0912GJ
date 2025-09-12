@@ -42,6 +42,9 @@ public class MusicCheck : MonoBehaviour
     //计时
     private void Update()
     {
+
+
+
         if(allowTimerStart && Timer<=maxTime)
         {
             Timer += Time.deltaTime;
@@ -49,9 +52,14 @@ public class MusicCheck : MonoBehaviour
             phigrosLine.transform.localPosition = new Vector3(-400 + Timer / maxTime * 800, 0, 0);
         }
 
+        //if (Timer > maxTime)
+        //{
+        //    ResetInput()
+        //}
+
 
         //编辑模式，测试使用捏
-        if(EditMode)
+        if (EditMode)
         {
             if (Input.GetKeyDown(KeyCode.A))
             {

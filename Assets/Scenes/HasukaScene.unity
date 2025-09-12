@@ -254,6 +254,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expendSpeed: 5
+  LifeTime: 7
+  passwordSO: {fileID: 11400000, guid: 87fbcbbd4ba2c0a41887fc4ff5144762, type: 2}
+  currentState: 0
+  musicCheck: {fileID: 0}
 --- !u!4 &944893666
 Transform:
   m_ObjectHideFlags: 0

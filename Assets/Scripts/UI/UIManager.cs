@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class UIManager
 {
     public List<UIBase> uiList;
     public Canvas uiCanvas;
+
+    public MusicCheck musicCheck;
 
     public void Init()
     {
@@ -31,6 +34,8 @@ public class UIManager
             }
         }
         uiList.Clear();
+
+        //清理一些不在列表中的UI
     }
 
     //开始菜单UI
@@ -40,6 +45,19 @@ public class UIManager
 
         //实例化开始菜单UI
         UIBase startButton = new UIBase("StartButton");
+
+        // 获取RectTransform
+        RectTransform rect = startButton.uiGo.GetComponent<RectTransform>();
+        if (rect != null)
+        {
+            // 初始缩放为0
+            rect.localScale = Vector3.zero;
+
+            // 缩放
+            rect.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack).SetLink(rect.gameObject,LinkBehaviour.KillOnDestroy); 
+            // 上下震动
+            rect.DOShakeAnchorPos(0.2f, new Vector2(0, 30), 10, 90, false, true).SetLink(rect.gameObject, LinkBehaviour.KillOnDestroy);
+        }
     }
 
     //关卡菜单UI
@@ -47,7 +65,10 @@ public class UIManager
     {
         ClearUIList();
 
+        //实例化关卡菜单UI
+        UIBase backButton = new UIBase("BackButton");
 
+        UIBase level_1Button = new UIBase("Level_1Button");
     }
 
     //局内游戏UI
@@ -55,6 +76,33 @@ public class UIManager
     {
         ClearUIList();
 
+        //实例化局内游戏UI
+        UIBase backButton = new UIBase("BackButton");
+        UIBase musicCheckUI = new UIBase("MusicCheckUI");
+    }
 
+    //返回确认UI
+    public void BackSureUI()
+    {
+        //实例化返回确认UI
+        UIBase backSureUI = new UIBase("BackSureUI");
+
+        // 获取RectTransform
+        RectTransform rect = backSureUI.uiGo.GetComponent<RectTransform>();
+        if (rect != null)
+        {
+            // 初始缩放为0
+            rect.localScale = Vector3.zero;
+            // 缩放
+            rect.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack).SetLink(rect.gameObject, LinkBehaviour.KillOnDestroy);
+        }
+    }
+
+    //删除返回确认UI
+    public void DestroyBackSureUI()
+    {
+        uiList.Find(ui => ui.uiGo.name == "BackSureUI(Clone)")?.Destroy();
+        //在列表中移除
+        uiList.RemoveAll(ui => ui.uiGo.name == "BackSureUI(Clone)");
     }
 }

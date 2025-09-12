@@ -20,6 +20,7 @@ public enum GameState
 public struct PassWord
 {
     public int levelIndex;
+    public float levelTime;
     public List<WaveAndTime> levelPassWord;
 }
 [System.Serializable]
@@ -123,11 +124,11 @@ public class GameManager : MonoBehaviour
         {
             if(pw.levelIndex==index)
             {
-                musicCheck.Init(pw.levelPassWord, index);
+                musicCheck.Init(pw.levelPassWord, index,pw.levelTime);
                 return;
             }
         }
-        musicCheck.Init(null, index);
+        musicCheck.Init(null, index,LevelTime:15f);
     }
 
     //传入事件与时间，在指定时间后触发事件

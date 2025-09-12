@@ -144,7 +144,11 @@ public class MusicCheck : MonoBehaviour
 
             }
 
-            //其他处理如UI创建等
+            //创建UI
+            Transform parentTf = GameObject.Find("Input").transform;
+            var Go = GameObject.Instantiate(Resources.Load<GameObject>("UI/word" + waveType), parentTf);
+            Go.transform.localPosition = new Vector3(-400 + Timer / maxTime * 800, 0, 0);
+            inputGoList.Add(Go);
         }
         //时间错误
         else

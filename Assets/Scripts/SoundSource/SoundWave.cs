@@ -3,6 +3,12 @@
 
 public class SoundWave : MonoBehaviour
 {
+
+    [Header("声源所属关卡索引")]
+    public int itsLevelIndex = 0; // 该声源所属的关卡索引
+    public WaveType itsWaveType = WaveType.A; // 该声源的波类型
+
+
     [Header("Prefabs & Optional Wiring")]
     [Tooltip("主波的Prefab，里边应带有 SpriteRenderer + CircleCollider2D(isTrigger) + Rigidbody2D(Kinematic) + WavePropagation2D")]
     public GameObject wavePrefab;
@@ -55,6 +61,8 @@ public class SoundWave : MonoBehaviour
 
             prop.obstacleTag = obstacleTag;
             prop.obstacleLayer = obstacleLayer;
+
+            prop.itsWaveType = itsWaveType;
         }
     }
 }

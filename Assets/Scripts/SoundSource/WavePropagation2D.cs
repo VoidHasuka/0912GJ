@@ -6,6 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class WavePropagation2D : MonoBehaviour
 {
+
+    public WaveType itsWaveType = WaveType.A; // 波类型
+
     [Header("Propagation")]
     public float startScale = 0f;       // 初始统一缩放
     public float expansionSpeed = 6f;   // 匀速扩张（每秒缩放增量）
@@ -58,13 +61,16 @@ public class WavePropagation2D : MonoBehaviour
     {
         // Layer 与 Tag 过滤
         if (((1 << other.gameObject.layer) & obstacleLayer) == 0) return;
-        if (!string.IsNullOrEmpty(obstacleTag) && !other.CompareTag(obstacleTag)) return; // :contentReference[oaicite:2]{index=2}
+        if (!string.IsNullOrEmpty(obstacleTag) && !other.CompareTag(obstacleTag)) return;
+
         if (_hitOnce.Contains(other)) return; // 对同一障碍只处理一次
         _hitOnce.Add(other);
 
         // 仅处理 BoxCollider2D 障碍
         var box = other as BoxCollider2D ?? other.GetComponent<BoxCollider2D>();
         if (box == null) return;
+
+       
 
         // 自身是“主波”还是“回声”，由 Tag 决定
         if (other.CompareTag("Obstacle"))

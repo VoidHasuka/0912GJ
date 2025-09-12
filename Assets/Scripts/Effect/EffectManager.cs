@@ -10,7 +10,7 @@ public class EffectManager
         //初始化特效管理器
         
         //测试用
-        PlayCheckRightEffect(new Vector2(0, 0), Color.green);
+        //PlayCheckRightEffect(new Vector2(0, 0), Color.green);
     }
 
     //播放音符正确特效

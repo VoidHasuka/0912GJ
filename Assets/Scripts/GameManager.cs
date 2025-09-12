@@ -44,7 +44,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Game State")]
     public GameState currentState;
+    public int currentLevelIndex = 0;
     public MusicCheck musicCheck;
+    private Receiver receiver;
 
     [Header("Managers")]
     [Tooltip("游戏中各个管理器的实例，方便全局访问，由GameManager自动创建")]
@@ -81,8 +83,32 @@ public class GameManager : MonoBehaviour
         ChangeGameState(GameState.Start);
     }
 
+    private void Update()
+    {
+        if (currentState == GameState.Play)
+        {
+            //左键移动位置
+
+            //右键启动所有声源
+            if (Input.GetMouseButtonDown(1))
+            {
+                musicCheck.ResetInput();
+                soundSourceManager.EmitAll();
+            }
+        }
+    }
+
     public void ChangeGameState(GameState newState)
     {
+        //清理
+        if(receiver!=null)
+        {
+            Destroy(receiver.gameObject);
+        }
+        //摄像机位置更新
+        Camera.main.transform.position = new Vector3(0, 0, -10);
+        //UI动画
+
         currentState = newState;
         // 根据新的游戏状态执行相应的操作
         switch (newState)
@@ -120,7 +146,15 @@ public class GameManager : MonoBehaviour
     //根据index加载关卡
     public void InitLevel(int index)
     {
-        foreach(var pw in passwordSO.passWords)
+
+        SwitchCameraPosition(index);
+
+
+
+
+
+        currentLevelIndex = index;
+        foreach (var pw in passwordSO.passWords)
         {
             if(pw.levelIndex==index)
             {
@@ -129,6 +163,36 @@ public class GameManager : MonoBehaviour
             }
         }
         musicCheck.Init(null, index,LevelTime:15f);
+    }
+
+    //根据index切换摄像机位置
+    private void SwitchCameraPosition(int index)
+    {
+        //创建接收器
+        receiver = GameObject.Instantiate(Resources.Load<Receiver>("Prefab/Receiver")).GetComponent<Receiver>();
+
+        //动画UI
+
+
+        //假设有一个预设的摄像机位置列表
+        //按类似的方式，可以扩展为更多位置
+        List<Vector3> cameraPositions = new List<Vector3>()
+        {
+            new Vector3(500,500,-10),
+            new Vector3(1000,1000,-10),
+            new Vector3(1500,1500,-10)
+        };
+        if(index>=0 && index<cameraPositions.Count)
+        {
+            //位置更新
+            Camera.main.transform.position = cameraPositions[index];
+            Vector3 offset = new Vector3(-1f, 1f, 0);
+            receiver.transform.position = new Vector3(cameraPositions[index].x, cameraPositions[index].y, 1) + offset;
+        }
+        else
+        {
+            Debug.LogWarning("无效的摄像机位置索引: " + index);
+        }
     }
 
     //传入事件与时间，在指定时间后触发事件

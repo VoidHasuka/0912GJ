@@ -72,5 +72,6 @@ public class ButtonEvent : MonoBehaviour
     public void OnClickResetMusicCheck()
     {
         GameManager.Instance.musicCheck.ResetInput();
+        GameManager.Instance.soundSourceManager.DeleteAllWave();
     }
 }

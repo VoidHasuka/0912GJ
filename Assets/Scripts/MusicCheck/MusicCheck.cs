@@ -244,6 +244,8 @@ public class MusicCheck : MonoBehaviour
             GameObject.Destroy(go);       
         }
         inputGoList.Clear();
+
+        inputIndex = 0;
     }
 
     public void DEstroyMusicCheck()

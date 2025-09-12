@@ -21,12 +21,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject); // 保证只有一个实例存在
         }
+
+        //初始化
+        soundSourceManager = new SoundSourceManager();
     }
 
     private void Start()
     {
-        //初始化
-        soundSourceManager = new SoundSourceManager();
+        
     }
 
 

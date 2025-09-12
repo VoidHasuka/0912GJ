@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class SoundSourceManager
 {
+    //所有声源
     public List<SoundSource> soundSources = new List<SoundSource>();
 
     public void Init()

@@ -30,4 +30,18 @@ public class SoundSourceManager
             }
         }
     }
+
+    public void DeleteAllWave()
+    {
+        var WaveGos = GameObject.FindGameObjectsWithTag("Wave");
+        var EchoGos = GameObject.FindGameObjectsWithTag("Echo");
+        foreach (var go in WaveGos)
+        {
+            GameObject.Destroy(go);
+        }
+        foreach (var go in EchoGos)
+        {
+            GameObject.Destroy(go);
+        }
+    }
 }

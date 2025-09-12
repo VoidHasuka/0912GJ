@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
             //右键启动所有声源
             if (Input.GetMouseButtonDown(1))
             {
-                musicCheck.ResetInput();
+                //musicCheck.ResetInput();
                 soundSourceManager.EmitAll();
             }
         }

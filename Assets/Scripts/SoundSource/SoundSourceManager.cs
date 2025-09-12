@@ -13,7 +13,7 @@ public class SoundSourceManager
     //初始化列表
     public void Init()
     {
-        soundSources = new List<SoundSource>();
+
     }
 
     //声源发射

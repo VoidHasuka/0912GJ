@@ -12,4 +12,10 @@ public class ButtonEvent : MonoBehaviour
     {
         GameManager.Instance.soundSourceManager.EmitAll();
     }
+
+    //进入关卡选择界面
+    public void OnClickEnterLevelSelect()
+    {
+        GameManager.Instance.uiManager.LevelMenuUI();
+    }
 }

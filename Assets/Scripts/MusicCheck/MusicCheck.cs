@@ -202,7 +202,7 @@ public class MusicCheck : MonoBehaviour
     { 
         foreach (var go in inputGoList)
         {
-            GameObject.Destroy(go);
+            GameObject.Destroy(go);       
         }
         inputGoList.Clear();
     }
@@ -212,4 +212,5 @@ public class MusicCheck : MonoBehaviour
         ClearInputUI();
         ClearPasswordUI();
     }
+
 }

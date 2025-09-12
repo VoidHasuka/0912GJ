@@ -172,7 +172,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   triangleMaskPlacer: {fileID: 4019577737039512648}
-  echoSpawner: {fileID: 0}
+  echoSpawner: {fileID: 709370293307394091}
   source: {fileID: 8991972131518011217}
 --- !u!114 &4019577737039512648
 MonoBehaviour:
@@ -191,10 +191,8 @@ MonoBehaviour:
   triangleBaseAlongLocalX: 1
   triangleBaseWorldWidth: 1
   heightScale: 1.2
-  useCustomRange: 1
-  mainWaveSortingLayer: WaveMain
-  mainWaveOrder: 100
-  rangePadding: 50
+  baseMidLocalFromPivot: {x: 0, y: 0}
+  mirrorAboutLocalX: 1
 --- !u!114 &709370293307394091
 MonoBehaviour:
   m_ObjectHideFlags: 0

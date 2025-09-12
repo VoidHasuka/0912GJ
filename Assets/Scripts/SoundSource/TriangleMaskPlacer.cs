@@ -3,33 +3,40 @@
 public class TriangleMaskPlacer : MonoBehaviour
 {
     [Header("Inputs")]
-    public Transform source;
-    public SpriteMask triangleMaskPrefab;
+    public Transform source;                // 声源
+    public SpriteMask triangleMaskPrefab;   // 三角遮罩 Prefab
 
     [Header("Triangle Sprite 假设")]
     [Tooltip("三角底边沿本地X轴、顶点在本地+Y；若不符，请在Prefab内预旋转。")]
     public bool triangleBaseAlongLocalX = true;
 
     [Header("尺寸匹配")]
-    [Tooltip("三角 sprite 底边的世界宽度（用于匹配障碍对边长度）。")]
+    [Tooltip("三角 sprite 在未缩放时的‘底边宽度’（世界单位），用于匹配障碍对边长度。")]
     public float triangleBaseWorldWidth = 1f;
-    [Tooltip("三角高向源侧延伸的比例。")]
+    [Tooltip("三角高向源侧延伸的比例；实际 sy = sx * heightScale。")]
     public float heightScale = 1.2f;
 
-    [Header("几何中心（质心）设置")]
-    [Tooltip("当前 Sprite 的 pivot 相对三角形几何中心(质心)的本地偏移；若Sprite的pivot已在几何中心，则(0,0)。\n典型：若pivot在底边中点且apex在y=1，则质心在(0,1/3)，此处应填(0, +1/3)。")]
-    public Vector2 centroidLocalOffsetFromPivot = Vector2.zero;
+    [Header("参考点改为‘底边中点’")]
+    [Tooltip("从 Sprite 的 pivot 指向‘底边中点(base-mid)’的本地位移向量。\n若你的 Sprite pivot 已在底边中点，此值为 (0,0)。\n例如：若 pivot 在几何中心且单位高为1，底边中点相对质心大约在 (0, -1/3)。")]
+    public Vector2 baseMidLocalFromPivot = Vector2.zero;
 
     [Header("方向控制")]
-    [Tooltip("勾选后：关于自身X轴对称（等价于本地Y轴取反）。")]
+    [Tooltip("勾选：关于自身x轴对称（等价于本地Y缩放取反）")]
     public bool mirrorAboutLocalX = true;
 
     /// <summary>
-    /// 将三角形底边对齐到“最面向 source 的边”的对边，且三角形几何中心对齐到对边中点。
-    /// 若 mirrorAboutLocalX=true，则在对齐完成后再关于自身x轴对称（本地Y翻转），
-    /// 并结合镜像修正质心位置，保证位置仍然对齐。
+    /// 保留旧签名：仅摆放遮罩（参考点=底边中点）
     /// </summary>
     public void PlaceMaskWithObstacle(BoxCollider2D obstacle)
+    {
+        PlaceMaskWithObstacle(obstacle, null);
+    }
+
+    /// <summary>
+    /// 摆放三角遮罩并可选对齐“碰到的那个物体”的 transform（仅位置+旋转）。
+    /// 参考点：三角形底边中点（而非 pivot / 质心）。
+    /// </summary>
+    public void PlaceMaskWithObstacle(BoxCollider2D obstacle, Transform alsoMove)
     {
         if (source == null || triangleMaskPrefab == null || obstacle == null)
         {
@@ -41,53 +48,52 @@ public class TriangleMaskPlacer : MonoBehaviour
         int idxFacing = ObstacleEdgeUtility.GetFacingEdgeIndex(obstacle, source.position);
         int idxOpp = (idxFacing + 2) % 4;
 
-        // 取对边端点/方向/长度/中点
+        // 2) 取对边端点/方向/长度/中点
         ObstacleEdgeUtility.GetEdgeEndpoints(obstacle, idxOpp, out Vector2 B0, out Vector2 B1);
         ObstacleEdgeUtility.EdgeGeom(B0, B1, out Vector2 Bmid, out Vector2 Bdir, out float Blen);
 
-        // 2) 实例化遮罩
-        SpriteMask mask = Instantiate(triangleMaskPrefab);
-        mask.name = "TriangleMask_AlignedToOppEdge";
-        mask.transform.position = Bmid;
-
-        // 3) 旋转：本地X 对齐对边方向；若本地+Y 未朝向声源，则反相
+        // 3) 基准旋转：本地+X沿对边方向；若+Y未朝向source则翻180°
         float edgeAng = Mathf.Atan2(Bdir.y, Bdir.x) * Mathf.Rad2Deg;
-        mask.transform.rotation = Quaternion.Euler(0, 0, edgeAng);
+        Quaternion baseRot = Quaternion.Euler(0, 0, edgeAng);
 
         Vector2 toSrc = ((Vector2)source.position - Bmid).normalized;
         Vector2 yAxisWorld = new Vector2(-Bdir.y, Bdir.x);
         if (Vector2.Dot(yAxisWorld, toSrc) < 0f)
+            baseRot *= Quaternion.Euler(0, 0, 180f);
+
+        // 4) 若需要，也把“碰到的那个物体”的 transform 对齐到这条对边（不改scale）
+        if (alsoMove != null)
         {
-            mask.transform.rotation *= Quaternion.Euler(0, 0, 180f);
-            yAxisWorld = -yAxisWorld;
+            alsoMove.position = Bmid;
+            alsoMove.rotation = baseRot;
         }
 
-        // 4) 缩放：底边长度匹配障碍对边
+        // 5) 实例化遮罩并做镜像/缩放
+        SpriteMask mask = Instantiate(triangleMaskPrefab);
+        mask.name = "TriangleMask_AlignedToOppEdge";
+        mask.transform.rotation = baseRot;
+
         float sx = (triangleBaseWorldWidth <= 1e-6f) ? 1f : (Blen / triangleBaseWorldWidth);
-        float sy = sx * heightScale;
-
-        // 5) 如需“关于自身x轴对称”，等价于把本地Y缩放取反
-        //    注意：镜像会使本地坐标系的 +Y 反向，因此后续质心偏移的Y也要同向取反
+        float syAbs = Mathf.Abs(sx * heightScale);
         int mirrorY = mirrorAboutLocalX ? -1 : 1;
-        mask.transform.localScale = new Vector3(sx, sy * mirrorY, 1f);
+        mask.transform.localScale = new Vector3(sx * 0.7f, syAbs * mirrorY * 1.5f, 1f);
 
-        // 6) 质心对齐修正（镜像后也精确对齐到 Bmid）
-        //    centroidLocalOffsetFromPivot 是“pivot 到 质心”的本地向量。
-        //    镜像后，其Y分量随本地Y翻转而改变，等价于 (x, y*mirrorY)。
-        Vector2 centroidLocalAfterMirror = new Vector2(
-            centroidLocalOffsetFromPivot.x,
-            centroidLocalOffsetFromPivot.y * mirrorY
+        // 6) 位置：以“底边中点”为参考对齐到 Bmid
+        //    baseMidLocalFromPivot 是 pivot→底边中点 的本地向量；
+        //    镜像后Y轴方向反转，因此其Y分量也随之取反
+        Vector2 baseMidLocalAfterMirror = new Vector2(
+            baseMidLocalFromPivot.x,
+            baseMidLocalFromPivot.y * mirrorY
         );
 
-        Vector2 worldOffset = (Vector2)(mask.transform.rotation * new Vector3(
-            centroidLocalAfterMirror.x * sx,
-            centroidLocalAfterMirror.y * Mathf.Abs(sy), // 取绝对值：长度缩放不关心镜像符号
+        // 本地→世界：先缩放（取 syAbs 作尺度），再旋转
+        Vector2 worldOffsetPivotToBaseMid = (Vector2)(mask.transform.rotation * new Vector3(
+            baseMidLocalAfterMirror.x * sx * 0.5f,
+            baseMidLocalAfterMirror.y * syAbs,
             0f
         ));
-        // 期望：pivot + worldOffset == Bmid →  pivot 应移动到 Bmid - worldOffset
-        mask.transform.position = Bmid - worldOffset;
 
-        // 说明：若你的 Sprite pivot 已在几何中心，可将 centroidLocalOffsetFromPivot 设为(0,0)。
-        //       镜像开关不会改变“对齐到对边中点”的结果。
+        // 令 底边中点(world) = Bmid ⇒ pivot(world) 应放在：Bmid - worldOffset
+        mask.transform.position = Bmid - worldOffsetPivotToBaseMid;
     }
 }

@@ -73,11 +73,14 @@ public class WavePropagation2D : MonoBehaviour
             {
                 if (triangleMaskPlacer.source == null && source != null)
                     triangleMaskPlacer.source = source;
-                triangleMaskPlacer.PlaceMaskWithObstacle(box);
+
+                // 传入当前物体的 transform → 同步对齐到“对边”的位置与朝向
+                triangleMaskPlacer.PlaceMaskWithObstacle(box, other.gameObject.transform);
             }
 
             if (echoSpawner != null)
             {
+                Debug.Log(111);
                 if (echoSpawner.source == null && source != null)
                     echoSpawner.source = source;
                 echoSpawner.SpawnEchoWithObstacle(box);

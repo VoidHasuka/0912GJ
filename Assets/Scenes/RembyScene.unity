@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 190568228}
   - component: {fileID: 190568227}
-  - component: {fileID: 190568226}
+  - component: {fileID: 190568229}
   m_Layer: 0
   m_Name: AudioSource
   m_TagString: Untagged
@@ -141,23 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &190568226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 190568225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf18198317259ec4492237eb9c3d7e87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wavePrefab: {fileID: 5482585612339727930, guid: 283583a07d54fff4d91186f5b28b01ff, type: 3}
-  wedgeMaskPrefab: {fileID: 0}
-  halfPlaneMaskPrefab: {fileID: 0}
-  waveSpeed: 6
-  waveLife: 8
 --- !u!212 &190568227
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -225,6 +208,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &190568229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190568225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e0a6cd63d718f745b77f1fbd3853b55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wavePrefab: {fileID: 5482585612339727930, guid: 283583a07d54fff4d91186f5b28b01ff, type: 3}
+  startScale: 0
+  expansionSpeed: 6
+  maxScale: 50
+  lifeTime: 8
+  obstacleTag: Obstacle
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  localSpawnOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &682575775
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +363,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   expendSpeed: 5
   LifeTime: 7
+  passwordSO: {fileID: 0}
+  currentState: 0
+  musicCheck: {fileID: 0}
 --- !u!4 &944893666
 Transform:
   m_ObjectHideFlags: 0
@@ -825,7 +833,6 @@ GameObject:
   - component: {fileID: 2039538130}
   - component: {fileID: 2039538127}
   - component: {fileID: 2039538132}
-  - component: {fileID: 2039538133}
   m_Layer: 3
   m_Name: Obstacle
   m_TagString: Obstacle
@@ -972,19 +979,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2039538133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2039538126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33a320b8fdc64b64aa51a32348817c01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  box: {fileID: 0}
 --- !u!1 &2133009698
 GameObject:
   m_ObjectHideFlags: 0

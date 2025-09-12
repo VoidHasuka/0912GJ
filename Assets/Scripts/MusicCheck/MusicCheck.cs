@@ -51,21 +51,24 @@ public class MusicCheck : MonoBehaviour
 
 
         //编辑模式，测试使用捏
-        if(Input.GetKeyDown(KeyCode.A))
+        if(EditMode)
         {
-            ReceiveInputNoPassword(WaveType.A);
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            ReceiveInputNoPassword(WaveType.B);
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            ReceiveInputNoPassword(WaveType.C);
-        }
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            MakeInputToPassword();
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                ReceiveInputWithoutCheck(WaveType.A);
+            }
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                ReceiveInputWithoutCheck(WaveType.B);
+            }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                ReceiveInputWithoutCheck(WaveType.C);
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                MakeInputToPassword();
+            }
         }
     }
 
@@ -104,10 +107,26 @@ public class MusicCheck : MonoBehaviour
         allowTimerStart = false;
     }
 
+
+    public void ReceiveInput(WaveType type)
+    {
+        if (EditMode)
+        {
+            ReceiveInputWithoutCheck(type);
+        }
+        else
+        {
+            ReceiveInputWithCheck(type);
+        }
+    }
+
+
+
     //接受输入并检查是否与密码器在允许范围内匹配
-    public void ReceiveInput(WaveType waveType)
+    public void ReceiveInputWithCheck(WaveType waveType)
     {
         //比对时间是否正确，若正确则加入输入器，absult为绝对正确时间
+        if (passwordList == null) return;
         float absultTime = passwordList[inputIndex].time;
         if (absultTime-faultToleranceTime/2 <= Timer && Timer <= absultTime + faultToleranceTime / 2)
         {
@@ -137,12 +156,13 @@ public class MusicCheck : MonoBehaviour
         if (inputList.Count == passwordList.Count)
         {
             //由GameManager处理成功事件
+            Debug.Log("当前关卡解密成功");
         }
 
     }
 
     //接受输入但不与密码器对比，编辑模式使用
-    public void ReceiveInputNoPassword(WaveType waveType)
+    public void ReceiveInputWithoutCheck(WaveType waveType)
     {
         //加入输入器
         WaveAndTime wat = new WaveAndTime();

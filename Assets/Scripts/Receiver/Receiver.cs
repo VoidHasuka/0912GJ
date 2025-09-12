@@ -25,11 +25,43 @@ public class Receiver : MonoBehaviour
             Debug.Log($"{name} 收到了波段碰撞: {other.name}");
             if (sr != null)
             {
+                //// 将接收器着色为反馈颜色
+                //sr.color = triggeredColor;
+                //// 短暂延时后恢复原色
+                //Invoke(nameof(ResetColor), 0.5f);
+            }
+
+            // 检测到是接收器
+            if (other.GetComponent<WavePropagation2D>() != null)
+            {
+                //执行逻辑
+
+                //音效播放
+
+                //UI更新
+                GameManager.Instance.musicCheck.ReceiveInput(other.GetComponent<WavePropagation2D>().itsWaveType);
+            }
+        }
+
+        //检测进入触发范围的对象是否是回声（通过Tag识别）
+        else if (other.CompareTag("Echo"))
+        {
+            Debug.Log($"{name} 收到了回声碰撞: {other.name}");
+            if (sr != null)
+            {
                 // 将接收器着色为反馈颜色
                 sr.color = triggeredColor;
                 // 短暂延时后恢复原色
                 Invoke(nameof(ResetColor), 0.5f);
             }
+            // 检测到是回声
+            //if (other.GetComponent<Echo>() != null)
+            //{
+            //    //执行逻辑
+            //    //音效播放
+            //    //UI更新
+            //    GameManager.Instance.musicCheck.ReceiveInput(other.GetComponent<Echo>().itsWaveType);
+            //}
         }
     }
 

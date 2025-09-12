@@ -23,7 +23,10 @@ public class SoundSourceManager
         {
             if(source!=null)
             {
-                source.EmitWave();
+                if(source.itsLevelIndex==GameManager.Instance.currentLevelIndex)
+                {
+                    source.EmitWave();
+                }
             }
         }
     }

@@ -164,7 +164,7 @@ public class UIManager
         //实例化导航UI
         UIBase targetUI = new UIBase("targetUI");
         //加入parent
-        targetUI.uiGo.transform.parent = parent.transform;
+        targetUI.uiGo.transform.SetParent(parent.transform,false);
         targetUI.uiGo.transform.position = levelButtonList[GameManager.Instance.currentLevelIndex].uiGo.transform.position;
     }
 

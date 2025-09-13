@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class AudioManager
 {
-    private AudioSource waveAudioSource;
+    //private AudioSource waveAudioSource;
+
+    private GameObject audioSourceGo;
 
     private AudioClip waveClipA;
     private AudioClip waveClipB;
@@ -14,9 +16,7 @@ public class AudioManager
         //waveAudioSource = new AudioSource();
         //waveAudioSource.loop = false;
 
-        GameObject audioSource = new GameObject("AudioSource");
-        waveAudioSource = audioSource.AddComponent<AudioSource>();
-        waveAudioSource.loop = false;
+        audioSourceGo = new GameObject("AudioSource");       
 
 
         waveClipA = Resources.Load<AudioClip>("Audio/A");
@@ -41,7 +41,12 @@ public class AudioManager
             default:
                 break;
         }
-        waveAudioSource.clip = toBePlayClip;
-        waveAudioSource.Play();
+        //先创建，播放完后销毁
+        var tmpAudioSource = audioSourceGo.AddComponent<AudioSource>();
+        tmpAudioSource.loop = false;
+        tmpAudioSource.clip = toBePlayClip;
+        tmpAudioSource.Play();
+
+        GameObject.Destroy(tmpAudioSource, toBePlayClip.length);
     }
 }

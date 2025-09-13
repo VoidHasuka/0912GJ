@@ -35,6 +35,7 @@ public struct WaveAndTime
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public GameObject cursorEff;
 
 
     [Header("Game Settings")]
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour
         {
             //左键移动位置
             receiver.GetComponent<ReceiverMove>().ReceiverMoveByMouse();
+
             //右键启动所有声源
             if (Input.GetMouseButtonUp(1))
             {

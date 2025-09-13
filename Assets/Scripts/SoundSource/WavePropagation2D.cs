@@ -28,7 +28,7 @@ public class WavePropagation2D : MonoBehaviour
     private readonly HashSet<Collider2D> _hitOnce = new();
     private float _age;
 
-    void Awake()
+    void Start()
     {
         // 匀速扩张从 startScale 开始
         transform.localScale = Vector3.one * startScale;

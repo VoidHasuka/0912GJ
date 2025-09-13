@@ -182,10 +182,6 @@ public class GameManager : MonoBehaviour
 
         SwitchCameraPosition(index);
 
-
-
-
-
         currentLevelIndex = index;
 
         foreach (var pw in passwordSO.passWords)

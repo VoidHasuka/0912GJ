@@ -155,7 +155,7 @@ public class MusicCheck : MonoBehaviour
         Go.transform.localPosition = new Vector3(-400 + Timer / maxTime * 800, Go.transform.localPosition.y, Go.transform.localPosition.z);
         inputGoList.Add(Go);
 
-        if (absultTime-faultToleranceTime/2 <= Timer && Timer <= absultTime + faultToleranceTime / 2)
+        if (absultTime-faultToleranceTime/2 <= Timer && Timer <= absultTime + faultToleranceTime / 2 && passwordList[inputIndex].waveType == waveType)
         {
             //时间正确，加入输入器
             WaveAndTime wat = new WaveAndTime();

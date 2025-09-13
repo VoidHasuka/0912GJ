@@ -13,9 +13,6 @@ public class UIManager
 
     public GameObject cursorGo;
 
-    //不注册到UILIST中，游戏过程始终保留
-    public GameObject parent;
-
     public void Init()
     {
         if(!GameObject.Find("UICanvas"))
@@ -33,9 +30,6 @@ public class UIManager
         //Cursor.visible = false;
         //创建cursor，并设置为最高层级
         cursorGo = GameObject.Instantiate(Resources.Load<GameObject>("UI/CursorUI"), uiCanvas.transform);    
-
-        //创建parent并挂载到uiCanvas上
-        parent = GameObject.Instantiate(Resources.Load<GameObject>("UI/parent"),uiCanvas.transform);
     }
 
     private void ClearUIList()
@@ -77,23 +71,10 @@ public class UIManager
     //关卡菜单UI
     public void LevelMenuUI()
     {
+        ClearUIList();
 
-        
-
-        bool existStartUI = false;
-        foreach (var ui in uiList)
-        {
-            if ((ui.uiGo.name == "StartButton(Clone)"))
-            {
-                existStartUI = true;
-            }
-        }
-        if (!existStartUI)
-        {
-            ClearUIList();
-        }
-
-        
+        //实例化关卡菜单UI
+        UIBase backButton = new UIBase("BackButton");
 
         UIBase level_1Button = new UIBase("Level_1Button");
         UIBase level_2Button = new UIBase("Level_2Button");
@@ -104,29 +85,6 @@ public class UIManager
         UIBase level_7Button = new UIBase("Level_7Button");
         UIBase level_8Button = new UIBase("Level_8Button");
 
-
-        //进行平滑移动
-        if (existStartUI)
-        {
-            //将所有ui添加为parent的子物体
-            foreach (var ui in uiList) 
-            {
-                ui.uiGo.transform.SetParent(parent.transform, false);
-            }
-            parent.transform.DOLocalMoveX(-1920f, 3f).From(0f,true);
-        }
-        else
-        {
-            //将所有ui添加为parent的子物体
-            foreach (var ui in uiList)
-            {   
-                ui.uiGo.transform.SetParent(parent.transform, false);
-            }
-            parent.transform.localPosition = new Vector3(-1920f,0f,0f);
-        }
-
-        //实例化关卡菜单UI
-        UIBase backButton = new UIBase("BackButton");
     }
 
     //局内游戏UI

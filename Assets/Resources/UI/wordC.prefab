@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7777670284833386560}
   - component: {fileID: 592786900203540163}
   - component: {fileID: 1402549577171739062}
+  - component: {fileID: 2303648731200775970}
   m_Layer: 5
   m_Name: wordC
   m_TagString: Untagged
@@ -35,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -50, y: 0}
-  m_SizeDelta: {x: 10, y: 100}
+  m_SizeDelta: {x: 51, y: 83}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &592786900203540163
 CanvasRenderer:
@@ -65,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: a29166b3690884c499a2169cc402e277, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -75,3 +76,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2303648731200775970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265732693337120983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29f63f6b64f9a324588338296b776e1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  img: {fileID: 1402549577171739062}
+  target: {fileID: 21300000, guid: a29166b3690884c499a2169cc402e277, type: 3}
+  show: {fileID: 21300000, guid: bfd044d9be1d1c54c84584ef2a46d8cf, type: 3}
+  use: {fileID: 21300000, guid: 3346c3c21696e4941a9e4891f8aacd36, type: 3}

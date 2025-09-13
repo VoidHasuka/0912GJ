@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 2027579911558294183}
   - component: {fileID: 4019577737039512648}
   - component: {fileID: 709370293307394091}
-  - component: {fileID: -6429291142617909550}
+  - component: {fileID: -94966778016015731}
   m_Layer: 0
-  m_Name: wave
+  m_Name: waveInvi
   m_TagString: Wave
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 0}
   echoPrefab: {fileID: 1668385067440340209, guid: 264796d5d4f3c664ba9b4c11ad51f7d2, type: 3}
---- !u!95 &-6429291142617909550
+--- !u!95 &-94966778016015731
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ Animator:
   m_GameObject: {fileID: 5482585612339727930}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 409ea21fe54fdc24db37bcff7eba0e09, type: 2}
+  m_Controller: {fileID: 9100000, guid: 784bef98c85c939448fa044e94694141, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

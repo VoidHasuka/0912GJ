@@ -13,6 +13,9 @@ public class UIManager
 
     public GameObject cursorGo;
 
+    //不注册到UILIST中，游戏过程始终保留
+    public GameObject parent;
+
     public void Init()
     {
         if(!GameObject.Find("UICanvas"))
@@ -30,6 +33,9 @@ public class UIManager
         //Cursor.visible = false;
         //创建cursor，并设置为最高层级
         cursorGo = GameObject.Instantiate(Resources.Load<GameObject>("UI/CursorUI"), uiCanvas.transform);    
+
+        //创建parent并挂载到uiCanvas上
+        parent = GameObject.Instantiate(Resources.Load<GameObject>("UI/parent"),uiCanvas.transform);
     }
 
     private void ClearUIList()
@@ -71,20 +77,68 @@ public class UIManager
     //关卡菜单UI
     public void LevelMenuUI()
     {
-        ClearUIList();
+
+        
+
+        bool existStartUI = false;
+        foreach (var ui in uiList)
+        {
+            if ((ui.uiGo.name == "StartButton(Clone)"))
+            {
+                existStartUI = true;
+
+                //透明然后删除掉这个StartButton
+                uiList.Remove(ui);
+                ui.uiGo.GetComponent<Image>().DOColor(new Color(1f, 1f, 1f,0f), 1f).OnComplete(() => { ui.Destroy(); });
+                break;
+            }
+        }
+        if (!existStartUI)
+        {
+            ClearUIList();
+        }
+
+
+
+        //UIBase level_1Button = new UIBase("Level_1Button");
+        //UIBase level_2Button = new UIBase("Level_2Button");
+        //UIBase level_3Button = new UIBase("Level_3Button");
+        //UIBase level_4Button = new UIBase("Level_4Button");
+        //UIBase level_5Button = new UIBase("Level_5Button");
+        //UIBase level_6Button = new UIBase("Level_6Button");
+        //UIBase level_7Button = new UIBase("Level_7Button");
+        //UIBase level_8Button = new UIBase("Level_8Button");
+
+        for (int i = 0; i <= GameManager.Instance.lastLevelIndex; i++)
+        {
+            int tmpValue = i + 1;
+            UIBase level_Button = new UIBase("Level_" + tmpValue.ToString() + "Button");
+        }
+
+
+
+        //进行平滑移动
+        if (existStartUI)
+        {
+            //将所有ui添加为parent的子物体
+            foreach (var ui in uiList) 
+            {
+                ui.uiGo.transform.SetParent(parent.transform, false);
+            }
+            parent.transform.DOLocalMoveX(-1920f, 1.5f).From(0f,true);
+        }
+        else
+        {
+            //将所有ui添加为parent的子物体
+            foreach (var ui in uiList)
+            {   
+                ui.uiGo.transform.SetParent(parent.transform, false);
+            }
+            parent.transform.localPosition = new Vector3(-uiCanvas.gameObject.GetComponent<RectTransform>().rect.width,0f,0f);
+        }
 
         //实例化关卡菜单UI
         UIBase backButton = new UIBase("BackButton");
-
-        UIBase level_1Button = new UIBase("Level_1Button");
-        UIBase level_2Button = new UIBase("Level_2Button");
-        UIBase level_3Button = new UIBase("Level_3Button");
-        UIBase level_4Button = new UIBase("Level_4Button");
-        UIBase level_5Button = new UIBase("Level_5Button");
-        UIBase level_6Button = new UIBase("Level_6Button");
-        UIBase level_7Button = new UIBase("Level_7Button");
-        UIBase level_8Button = new UIBase("Level_8Button");
-
     }
 
     //局内游戏UI
@@ -96,7 +150,7 @@ public class UIManager
         UIBase backButton = new UIBase("BackButton");
         UIBase musicCheckUI = new UIBase("MusicCheckUI");
 
-        UIBase resetButton = new UIBase("ResetButton");
+        //UIBase resetButton = new UIBase("ResetButton");
 
         UIBase ShootUI = new UIBase("ShootUI");
         UIBase MouseUseUI = new UIBase("MouseUseUI");
@@ -127,5 +181,10 @@ public class UIManager
         //在列表中移除
         uiList.RemoveAll(ui => ui.uiGo.name == "BackSureUI(Clone)");
     }
-    
+
+    //生成关卡结束UI
+    public void LevelSuccessUI()
+    {
+        UIBase LevelEndUI = new UIBase("LevelEndUI");
+    }
 }

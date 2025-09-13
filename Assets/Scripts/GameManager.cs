@@ -45,8 +45,10 @@ public class GameManager : MonoBehaviour
     [Header("Game State")]
     public GameState currentState;
     public int currentLevelIndex = 0;
+    public int lastLevelIndex = 0;
     public MusicCheck musicCheck;
     private Receiver receiver;
+    private ReceiverMove souceMove;
 
     [Header("Managers")]
     [Tooltip("游戏中各个管理器的实例，方便全局访问，由GameManager自动创建")]
@@ -101,7 +103,8 @@ public class GameManager : MonoBehaviour
         if (currentState == GameState.Play)
         {
             //左键移动位置
-            receiver.GetComponent<ReceiverMove>().ReceiverMoveByMouse();
+            receiver.GetComponent<ReceiverMove>()?.ReceiverMoveByMouse();
+            if(souceMove!=null)souceMove.ReceiverMoveByMouse();
             //右键启动所有声源
             if (Input.GetMouseButtonUp(1))
             {
@@ -176,6 +179,7 @@ public class GameManager : MonoBehaviour
 
 
         currentLevelIndex = index;
+
         foreach (var pw in passwordSO.passWords)
         {
             if(pw.levelIndex==index)
@@ -192,6 +196,13 @@ public class GameManager : MonoBehaviour
     {
         //创建接收器
         receiver = GameObject.Instantiate(Resources.Load<Receiver>("Prefab/Receiver")).GetComponent<Receiver>();
+
+        if(index == 7)
+        {
+            Destroy(receiver.GetComponent<ReceiverMove>());
+            souceMove = GameObject.Find("SourceWave_Move").GetComponent<ReceiverMove>();
+
+        }
 
         //动画UI
 
@@ -214,6 +225,12 @@ public class GameManager : MonoBehaviour
             //位置更新
             Camera.main.transform.position = cameraPositions[index];
             Vector3 offset = new Vector3(0, 0, 0);
+
+            if (index == 7)
+            {
+                offset = new Vector3(4.2f, -2f, 0);
+            }
+            
             receiver.transform.position = new Vector3(cameraPositions[index].x, cameraPositions[index].y, 1) + offset;
         }
         else
@@ -230,5 +247,18 @@ public class GameManager : MonoBehaviour
         {
             action?.Invoke();
         });
+    }
+
+    public void LevelSuccess()
+    {
+        lastLevelIndex++;
+
+        //计算准度
+        float accuracyRate =(1-musicCheck.ComputeAccuracy()) * 100;
+
+        Debug.Log("你的准度为"+accuracyRate + "%");
+
+        //弹出UI
+        uiManager.LevelSuccessUI();
     }
 }

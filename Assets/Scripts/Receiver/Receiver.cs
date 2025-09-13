@@ -32,10 +32,13 @@ public class Receiver : MonoBehaviour
             }
             if (sr != null)
             {
-                // 将接收器着色为反馈颜色
-                sr.color = triggeredColor;
-                // 短暂延时后恢复原色
-                Invoke(nameof(ResetColor), 0.5f);
+                //// 将接收器着色为反馈颜色
+                //sr.color = triggeredColor;
+                //// 短暂延时后恢复原色
+                //Invoke(nameof(ResetColor), 0.5f);
+
+                sr.gameObject.GetComponent<Animator>().Play("ReceLing", 0, 0f);
+
             }
 
             // 检测到是接收器
@@ -57,10 +60,13 @@ public class Receiver : MonoBehaviour
             Debug.Log($"{name} 收到了回声碰撞: {other.name}");
             if (sr != null)
             {
-                // 将接收器着色为反馈颜色
-                sr.color = triggeredColor;
-                // 短暂延时后恢复原色
-                Invoke(nameof(ResetColor), 0.5f);
+                //// 将接收器着色为反馈颜色
+                //sr.color = triggeredColor;
+                //// 短暂延时后恢复原色
+                //Invoke(nameof(ResetColor), 0.5f);
+
+
+                sr.gameObject.GetComponent<Animator>().Play("ReceLing", 0, 0f);
             }
             // 检测到是回声
             //if (other.GetComponent<Echo>() != null)

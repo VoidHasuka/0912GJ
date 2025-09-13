@@ -184,7 +184,23 @@ public class MusicCheck : MonoBehaviour
         {
             //由GameManager处理成功事件
             Debug.Log("当前关卡解密成功");
+
+            GameManager.Instance.LevelSuccess();
         }
+
+    }
+
+
+    //计算准度并返回非百分数
+    public float ComputeAccuracy()
+    {
+        float result = 0f;
+        for (int i = 0; i < inputList.Count; i++)
+        {
+            int tmpValue = i;
+            result += (Mathf.Abs(inputList[tmpValue].time - passwordList[tmpValue].time)) / maxTime;
+        }
+        return result;
 
     }
 

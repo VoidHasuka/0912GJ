@@ -114,4 +114,5 @@ public class UIManager
         //在列表中移除
         uiList.RemoveAll(ui => ui.uiGo.name == "BackSureUI(Clone)");
     }
+    
 }

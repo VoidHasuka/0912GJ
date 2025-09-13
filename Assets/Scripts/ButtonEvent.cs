@@ -90,9 +90,14 @@ public class ButtonEvent : MonoBehaviour
     public void OnClickEnterNextLevel()
     {
         GameManager.Instance.ChangeGameState(GameState.Level);
-        GameManager.Instance.ChangeGameState(GameState.Play);
 
-        GameManager.Instance.InitLevel(GameManager.Instance.currentLevelIndex);
+        GameManager.Instance.InvokeAfterDelay(() =>
+        {
+
+            GameManager.Instance.ChangeGameState(GameState.Play);
+
+            GameManager.Instance.InitLevel(GameManager.Instance.lastLevelIndex);
+        }, 0.1f);
     }
 
 }

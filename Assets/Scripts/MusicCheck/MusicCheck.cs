@@ -184,6 +184,8 @@ public class MusicCheck : MonoBehaviour
         {
             //由GameManager处理成功事件
             Debug.Log("当前关卡解密成功");
+
+            GameManager.Instance.LevelSuccess();
         }
 
     }

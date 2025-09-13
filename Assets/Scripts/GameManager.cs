@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     [Header("Game State")]
     public GameState currentState;
     public int currentLevelIndex = 0;
+    public int lastLevelIndex = 0;
     public MusicCheck musicCheck;
     private Receiver receiver;
 
@@ -177,6 +178,7 @@ public class GameManager : MonoBehaviour
 
 
         currentLevelIndex = index;
+
         foreach (var pw in passwordSO.passWords)
         {
             if(pw.levelIndex==index)
@@ -231,5 +233,12 @@ public class GameManager : MonoBehaviour
         {
             action?.Invoke();
         });
+    }
+
+    public void LevelSuccess()
+    {
+        lastLevelIndex++;
+        //弹出UI
+        uiManager.LevelSuccessUI();
     }
 }

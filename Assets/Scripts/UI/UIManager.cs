@@ -27,7 +27,7 @@ public class UIManager
         uiList = new List<UIBase>();
 
         //隐藏原有cursor
-        Cursor.visible = false;
+        //Cursor.visible = false;
         //创建cursor，并设置为最高层级
         cursorGo = GameObject.Instantiate(Resources.Load<GameObject>("UI/CursorUI"), uiCanvas.transform);    
     }
@@ -100,6 +100,7 @@ public class UIManager
 
         UIBase ShootUI = new UIBase("ShootUI");
         UIBase MouseUseUI = new UIBase("MouseUseUI");
+        UIBase PlayUI = new UIBase("PlayUI");
     }
 
     //返回确认UI

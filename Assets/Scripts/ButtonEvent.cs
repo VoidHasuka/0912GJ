@@ -74,4 +74,10 @@ public class ButtonEvent : MonoBehaviour
         GameManager.Instance.musicCheck.ResetInput();
         GameManager.Instance.soundSourceManager.DeleteAllWave();
     }
+
+    //启动所有声源
+    public void OnClickPlayAllSound()
+    {
+        GameManager.Instance.PlayAllSound();
+    }
 }

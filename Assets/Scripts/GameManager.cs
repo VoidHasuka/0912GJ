@@ -104,12 +104,17 @@ public class GameManager : MonoBehaviour
             {
                 //musicCheck.ClearPasswordUI();
                 //ClearPasswordUI
-                soundSourceManager.DeleteAllWave();
-                musicCheck.ResetInput();
-                soundSourceManager.EmitAll();
+                PlayAllSound();
 
             }
         }
+    }
+
+    public void PlayAllSound()
+    {
+        soundSourceManager.DeleteAllWave();
+        musicCheck.ResetInput();
+        soundSourceManager.EmitAll();
     }
 
     public void ChangeGameState(GameState newState)

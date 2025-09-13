@@ -201,15 +201,19 @@ public class GameManager : MonoBehaviour
         {
             Destroy(receiver.GetComponent<ReceiverMove>());
             souceMove = GameObject.Find("SourceWave_Move").GetComponent<ReceiverMove>();
-
+            if(souceMove==null)souceMove=GameObject.Find("SourceWave_Move").AddComponent<ReceiverMove>();
+        }
+        else
+        {
+            if(souceMove!=null)GameObject.Destroy(souceMove);
         }
 
-        //动画UI
+            //动画UI
 
 
-        //假设有一个预设的摄像机位置列表
-        //按类似的方式，可以扩展为更多位置
-        List<Vector3> cameraPositions = new List<Vector3>()
+            //假设有一个预设的摄像机位置列表
+            //按类似的方式，可以扩展为更多位置
+            List<Vector3> cameraPositions = new List<Vector3>()
         {
             new Vector3(500,500,-10),
             new Vector3(1000,1000,-10),

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager
 {
@@ -183,8 +184,21 @@ public class UIManager
     }
 
     //生成关卡结束UI
-    public void LevelSuccessUI()
+    public void LevelSuccessUI(string t)
     {
         UIBase LevelEndUI = new UIBase("LevelEndUI");
+
+        LevelEndUI.uiGo.GetComponentInChildren<TextMeshProUGUI>().text = t;
+
+        //执行补间动画
+        RectTransform rt = LevelEndUI.uiGo.GetComponent<RectTransform>();
+
+        //scale变化
+        rt.DOScaleX(1f, 0.85f);
+
+        GameManager.Instance.InvokeAfterDelay(() =>
+        {
+            GameManager.Instance.EnterNextLevel();
+        }, 2.85f);
     }
 }

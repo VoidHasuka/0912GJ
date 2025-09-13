@@ -260,9 +260,21 @@ public class GameManager : MonoBehaviour
         //计算准度
         float accuracyRate =(1-musicCheck.ComputeAccuracy()) * 100;
 
-        Debug.Log("你的准度为"+accuracyRate + "%");
+        string text = "准确度" + ((int)accuracyRate).ToString() + "%！";
 
         //弹出UI
-        uiManager.LevelSuccessUI();
+        uiManager.LevelSuccessUI(text);
+    }
+
+    public void EnterNextLevel()
+    {
+
+        ChangeGameState(GameState.Level);
+
+        InvokeAfterDelay(() =>
+        {
+            ChangeGameState(GameState.Play);
+            InitLevel(lastLevelIndex);
+        }, 0f);
     }
 }

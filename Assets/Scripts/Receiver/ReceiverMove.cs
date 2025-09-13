@@ -48,7 +48,6 @@ public class ReceiverMove : MonoBehaviour
                 // 点击在 UI（按钮或其他 UI 元素上），不移动
                 return;
             }
-            Debug.Log("Receiver Move");
             Vector3 mouseScreen = Input.mousePosition;
             // z 不管，因为是 2D 正交相机，ScreenToWorldPoint 的 z 会被忽略（或者用相机的距离）
             Vector3 worldPos = cam.ScreenToWorldPoint(mouseScreen);

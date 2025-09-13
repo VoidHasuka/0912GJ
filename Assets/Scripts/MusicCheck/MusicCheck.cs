@@ -148,6 +148,13 @@ public class MusicCheck : MonoBehaviour
         if (passwordList == null) return;
         float absultTime = passwordList[inputIndex].time;
 
+        //开始首次计时，并启动UI
+        if (!allowTimerStart)
+        {
+            allowTimerStart = true;
+
+        }
+
         //创建UI
         Transform parentTf = GameObject.Find("Input").transform;
         var Go = GameObject.Instantiate(Resources.Load<GameObject>("UI/word" + waveType), parentTf);
@@ -164,12 +171,7 @@ public class MusicCheck : MonoBehaviour
             inputList.Add(wat);
             inputIndex++;
 
-            //开始首次计时，并启动UI
-            if (!allowTimerStart)
-            {
-                allowTimerStart = true;
 
-            }
 
            
         }

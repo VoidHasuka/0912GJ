@@ -264,6 +264,8 @@ public class MusicCheck : MonoBehaviour
 
     public void PlayPassword()
     {
+        if(allowTimerStart) return;
+
         allowTimerStart = true;
 
         float delayTime = 0f;

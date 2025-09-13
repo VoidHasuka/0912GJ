@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8991972131518011217}
   - component: {fileID: 7298417911771561569}
-  - component: {fileID: 4485568951362082043}
+  - component: {fileID: 3287584763383158865}
   - component: {fileID: 3860655709821580236}
   - component: {fileID: 2027579911558294183}
   - component: {fileID: 4019577737039512648}
   - component: {fileID: 709370293307394091}
+  - component: {fileID: -6429291142617909550}
   m_Layer: 0
   m_Name: wave
   m_TagString: Wave
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.35686275}
   m_FlipX: 0
@@ -89,8 +90,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
---- !u!58 &4485568951362082043
-CircleCollider2D:
+--- !u!60 &3287584763383158865
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -122,8 +123,38 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 0.5}
+      - {x: -0.15234375, y: 0.47265625}
+      - {x: -0.29296875, y: 0.40234375}
+      - {x: -0.40234375, y: 0.29296875}
+      - {x: -0.47265625, y: 0.15234375}
+      - {x: -0.5, y: 0}
+      - {x: -0.47265625, y: -0.15234375}
+      - {x: -0.40234375, y: -0.29296875}
+      - {x: -0.29296875, y: -0.40234375}
+      - {x: -0.15234375, y: -0.47265625}
+      - {x: 0, y: -0.5}
+      - {x: 0.15234375, y: -0.47265625}
+      - {x: 0.29296875, y: -0.40234375}
+      - {x: 0.40234375, y: -0.29296875}
+      - {x: 0.47265625, y: -0.15234375}
+      - {x: 0.5, y: 0}
+      - {x: 0.47265625, y: 0.15234375}
+      - {x: 0.40234375, y: 0.29296875}
+      - {x: 0.29296875, y: 0.40234375}
+      - {x: 0.15234375, y: 0.47265625}
+  m_UseDelaunayMesh: 0
 --- !u!50 &3860655709821580236
 Rigidbody2D:
   serializedVersion: 4
@@ -163,6 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b83cf437db01564e8ef429b64b4b7bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itsWaveType: 0
   startScale: 0
   expansionSpeed: 5
   maxScale: 50
@@ -191,7 +223,7 @@ MonoBehaviour:
   triangleBaseAlongLocalX: 1
   triangleBaseWorldWidth: 1
   heightScale: 1.2
-  baseMidLocalFromPivot: {x: 0, y: 0}
+  centroidLocalOffsetFromPivot: {x: 0, y: 0}
   mirrorAboutLocalX: 1
 --- !u!114 &709370293307394091
 MonoBehaviour:
@@ -207,3 +239,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 0}
   echoPrefab: {fileID: 1668385067440340209, guid: 264796d5d4f3c664ba9b4c11ad51f7d2, type: 3}
+--- !u!95 &-6429291142617909550
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5482585612339727930}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 409ea21fe54fdc24db37bcff7eba0e09, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -11,6 +11,9 @@ public class ReceiverMove : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 targetPos;            // nullable：若为 null 表示目前不动
 
+    private float Timer = 0f;
+    private float lockTime = 1f;  // 每次右键后锁定一段时间
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -20,22 +23,32 @@ public class ReceiverMove : MonoBehaviour
 
     void Update()
     {
-        
+        if (GameManager.Instance.lockMove && Timer < lockTime) 
+        { 
+            Timer += Time.deltaTime;
+        }
+        else if(Timer >= lockTime)
+        {
+            Timer = 0f;
+            GameManager.Instance.lockMove = false;
+        }
     }
 
 
     public void ReceiverMoveByMouse()
     {
+        if (GameManager.Instance.lockMove && Timer < lockTime)
+            return;
         if (Input.GetMouseButtonDown(0))
         {
+            
             // 判断是否点击在 UI 元素上
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             {
-
                 // 点击在 UI（按钮或其他 UI 元素上），不移动
                 return;
             }
-
+            Debug.Log("Receiver Move");
             Vector3 mouseScreen = Input.mousePosition;
             // z 不管，因为是 2D 正交相机，ScreenToWorldPoint 的 z 会被忽略（或者用相机的距离）
             Vector3 worldPos = cam.ScreenToWorldPoint(mouseScreen);
@@ -44,6 +57,8 @@ public class ReceiverMove : MonoBehaviour
 
             targetPos = new Vector3(worldPos.x, worldPos.y, worldPos.z = transform.position.z);
             rb.gameObject.transform.DOMove(targetPos, 0.7f).SetEase(Ease.OutCubic);
+
+            GameManager.Instance.soundSourceManager.DeleteAllWave();
         }
     }
 

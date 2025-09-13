@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9e40eb1bd48b2498fd58de6b570b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EditMode: 0
+  EditMode: 1
   faultToleranceTime: 0.375
 --- !u!222 &2180170885925008815
 CanvasRenderer:

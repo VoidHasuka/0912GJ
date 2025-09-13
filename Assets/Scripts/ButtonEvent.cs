@@ -85,4 +85,12 @@ public class ButtonEvent : MonoBehaviour
     {
         GameManager.Instance.musicCheck.PlayPassword();
     }
+
+    public void OnClickNextLevel()
+    {
+        GameManager.Instance.currentLevelIndex++;
+        GameManager.Instance.ChangeGameState(GameState.Level);
+        GameManager.Instance.ChangeGameState(GameState.Play);
+        GameManager.Instance.InitLevel(GameManager.Instance.currentLevelIndex);
+    }
 }

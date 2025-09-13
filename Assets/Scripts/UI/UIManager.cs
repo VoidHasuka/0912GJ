@@ -95,14 +95,16 @@ public class UIManager
 
         
 
-        UIBase level_1Button = new UIBase("Level_1Button");
-        UIBase level_2Button = new UIBase("Level_2Button");
-        UIBase level_3Button = new UIBase("Level_3Button");
-        UIBase level_4Button = new UIBase("Level_4Button");
-        UIBase level_5Button = new UIBase("Level_5Button");
-        UIBase level_6Button = new UIBase("Level_6Button");
-        UIBase level_7Button = new UIBase("Level_7Button");
-        UIBase level_8Button = new UIBase("Level_8Button");
+        //UIBase level_1Button = new UIBase("Level_1Button");
+        //UIBase level_2Button = new UIBase("Level_2Button");
+        //UIBase level_3Button = new UIBase("Level_3Button");
+        //UIBase level_4Button = new UIBase("Level_4Button");
+        //UIBase level_5Button = new UIBase("Level_5Button");
+        //UIBase level_6Button = new UIBase("Level_6Button");
+        //UIBase level_7Button = new UIBase("Level_7Button");
+        //UIBase level_8Button = new UIBase("Level_8Button");
+
+
 
 
         //进行平滑移动

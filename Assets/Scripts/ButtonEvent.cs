@@ -80,4 +80,9 @@ public class ButtonEvent : MonoBehaviour
     {
         GameManager.Instance.PlayAllSound();
     }
+
+    public void OnClickPlayPasword()
+    {
+        GameManager.Instance.musicCheck.PlayPassword();
+    }
 }

@@ -125,7 +125,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8846870343614247788}
         m_TargetAssemblyTypeName: ButtonEvent, Assembly-CSharp
-        m_MethodName: OnClickPlayAllSound
+        m_MethodName: OnClickPlayPasword
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -33,12 +33,12 @@ public class Receiver : MonoBehaviour
 
             // 检测到是接收器
             if (other.GetComponent<WavePropagation2D>() != null)
-            {   
+            {
                 //Debug.Log("具有 WavePropagation2D 组件");
                 //执行逻辑
 
                 //音效播放
-
+                GameManager.Instance.audioManager.PlayWaveAudio(other.GetComponent<WavePropagation2D>().itsWaveType);
                 //UI更新
                 GameManager.Instance.musicCheck.ReceiveInput(other.GetComponent<WavePropagation2D>().itsWaveType);
             }

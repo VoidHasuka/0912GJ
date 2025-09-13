@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     public SoundSourceManager soundSourceManager;
     public UIManager uiManager;
     public EffectManager effectManager;
+    public AudioManager audioManager;
 
     private void Awake()
     {
@@ -71,11 +72,13 @@ public class GameManager : MonoBehaviour
         soundSourceManager = new SoundSourceManager();
         uiManager = new UIManager();
         effectManager = new EffectManager();
+        audioManager = new AudioManager();
 
         //初始化管理器
         soundSourceManager.Init();
         uiManager.Init();
         effectManager.Init();
+        audioManager.Init();
     }
 
     private void Start()

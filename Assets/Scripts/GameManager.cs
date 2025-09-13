@@ -196,6 +196,12 @@ public class GameManager : MonoBehaviour
         //创建接收器
         receiver = GameObject.Instantiate(Resources.Load<Receiver>("Prefab/Receiver")).GetComponent<Receiver>();
 
+        if(index == 7)
+        {
+            receiver.gameObject.GetComponent<ReceiverMove>().enabled = false;
+
+        }
+
         //动画UI
 
 

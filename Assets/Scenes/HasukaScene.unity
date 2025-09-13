@@ -466,6 +466,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &48662660
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -979,6 +980,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &204765344
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1532,6 +1534,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &348248443
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2052,6 +2055,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &482366233
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2104,6 +2108,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &492851323 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3562769713179996797, guid: 64319017cfa6d0a4eb4fe09e0fde43ac, type: 3}
+  m_PrefabInstance: {fileID: 624407256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &539297277
 GameObject:
   m_ObjectHideFlags: 0
@@ -2260,13 +2269,60 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3562769713179996797, guid: 64319017cfa6d0a4eb4fe09e0fde43ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 624407262}
+    - targetCorrespondingSourceObject: {fileID: 3562769713179996797, guid: 64319017cfa6d0a4eb4fe09e0fde43ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 624407261}
   m_SourcePrefab: {fileID: 100100000, guid: 64319017cfa6d0a4eb4fe09e0fde43ac, type: 3}
 --- !u!4 &624407257 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1716759219714174071, guid: 64319017cfa6d0a4eb4fe09e0fde43ac, type: 3}
   m_PrefabInstance: {fileID: 624407256}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &624407261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492851323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f647059ec889b6d4b9c5195fd9fd0f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  cam: {fileID: 0}
+--- !u!50 &624407262
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492851323}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &637455306
 GameObject:
   m_ObjectHideFlags: 0
@@ -2324,6 +2380,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &637455309
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3012,6 +3069,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &724440071
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3241,6 +3299,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &789115240
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3686,6 +3745,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &827219132
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3879,6 +3939,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &888905133
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4190,6 +4251,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &940509087
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4276,7 +4338,9 @@ MonoBehaviour:
   passwordSO: {fileID: 11400000, guid: 87fbcbbd4ba2c0a41887fc4ff5144762, type: 2}
   currentState: 0
   currentLevelIndex: 0
+  lastLevelIndex: 0
   musicCheck: {fileID: 0}
+  lockMove: 0
 --- !u!4 &944893666
 Transform:
   m_ObjectHideFlags: 0
@@ -5582,6 +5646,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &1171425751
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6445,6 +6510,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &1333250276
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6554,6 +6620,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &1336652843
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6820,6 +6887,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &1352377888
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7146,6 +7214,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &1544874182
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7693,6 +7762,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &1794830933
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7886,6 +7956,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &1814939239
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8346,6 +8417,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1880856488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1880856489}
+  m_Layer: 0
+  m_Name: TheLastSolver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1880856489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880856488}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4000.24, y: 3999.49, z: 10.112235}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1886653033
 GameObject:
   m_ObjectHideFlags: 0
@@ -8870,6 +8972,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &1978568153
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9255,6 +9358,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   localSpawnOffset: {x: 0, y: 0, z: 0}
+  Level: 0
 --- !u!212 &2086937481
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9599,3 +9703,4 @@ SceneRoots:
   - {fileID: 642456079}
   - {fileID: 1702750819}
   - {fileID: 2097446399}
+  - {fileID: 1880856489}

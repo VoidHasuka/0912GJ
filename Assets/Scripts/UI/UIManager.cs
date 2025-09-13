@@ -16,6 +16,7 @@ public class UIManager
 
     //不注册到UILIST中，游戏过程始终保留
     public GameObject parent;
+    public GameObject selectBGUI;
 
     public void Init()
     {
@@ -31,12 +32,16 @@ public class UIManager
         uiList = new List<UIBase>();
 
         //隐藏原有cursor
-        //Cursor.visible = false;
+        Cursor.visible = false;
         //创建cursor，并设置为最高层级
         cursorGo = GameObject.Instantiate(Resources.Load<GameObject>("UI/CursorUI"), uiCanvas.transform);    
 
         //创建parent并挂载到uiCanvas上
         parent = GameObject.Instantiate(Resources.Load<GameObject>("UI/parent"),uiCanvas.transform);
+
+        //创建selectBGUI并挂载到uiCanvas上
+        selectBGUI = GameObject.Instantiate(Resources.Load<GameObject>("UI/SelectBGUI"), uiCanvas.transform);
+        selectBGUI.transform.SetAsFirstSibling();
     }
 
     private void ClearUIList()
@@ -73,13 +78,14 @@ public class UIManager
             // 上下震动
             rect.DOShakeAnchorPos(0.2f, new Vector2(0, 30), 10, 90, false, true).SetLink(rect.gameObject, LinkBehaviour.KillOnDestroy);
         }
+
+        //SelectBGUI位置 重置
+        selectBGUI.transform.localPosition = new Vector3(840f, 0f, 0f);
     }
 
     //关卡菜单UI
     public void LevelMenuUI()
     {
-
-        
 
         bool existStartUI = false;
         foreach (var ui in uiList)
@@ -110,12 +116,23 @@ public class UIManager
         //UIBase level_7Button = new UIBase("Level_7Button");
         //UIBase level_8Button = new UIBase("Level_8Button");
 
+        List<UIBase> levelButtonList = new List<UIBase>();
         for (int i = 0; i <= GameManager.Instance.lastLevelIndex; i++)
         {
             int tmpValue = i + 1;
             UIBase level_Button = new UIBase("Level_" + tmpValue.ToString() + "Button");
+            levelButtonList.Add(level_Button);
+        }
+        for(int i = 0; i < levelButtonList.Count-1; i++)
+        {
+            var levelButtonUI = levelButtonList[i].uiGo.GetComponent<LevelButtonUI>();
+            levelButtonUI.Finished();
         }
 
+        
+
+        //激活BGUI
+        if(!selectBGUI.activeSelf)selectBGUI.SetActive(true);
 
 
         //进行平滑移动
@@ -127,6 +144,8 @@ public class UIManager
                 ui.uiGo.transform.SetParent(parent.transform, false);
             }
             parent.transform.DOLocalMoveX(-1920f, 1.5f).From(0f,true);
+
+            selectBGUI.transform.DOLocalMoveX(-800f, 1f).From(840f,true);
         }
         else
         {
@@ -136,16 +155,29 @@ public class UIManager
                 ui.uiGo.transform.SetParent(parent.transform, false);
             }
             parent.transform.localPosition = new Vector3(-uiCanvas.gameObject.GetComponent<RectTransform>().rect.width,0f,0f);
+
+            selectBGUI.transform.localPosition = new Vector3(-800f,0f,0f);
         }
 
         //实例化关卡菜单UI
         UIBase backButton = new UIBase("BackButton");
+        //实例化导航UI
+        UIBase targetUI = new UIBase("targetUI");
+        //加入parent
+        targetUI.uiGo.transform.parent = parent.transform;
+        targetUI.uiGo.transform.position = levelButtonList[GameManager.Instance.currentLevelIndex].uiGo.transform.position;
     }
 
     //局内游戏UI
     public void BasicGameUI()
     {
         ClearUIList();
+
+        //禁用BGUI
+        if (selectBGUI.activeSelf)
+        {
+            selectBGUI.SetActive(false);
+        }
 
         //实例化局内游戏UI
         UIBase backButton = new UIBase("BackButton");

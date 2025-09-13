@@ -238,6 +238,12 @@ public class GameManager : MonoBehaviour
     public void LevelSuccess()
     {
         lastLevelIndex++;
+
+        //计算准度
+        float accuracyRate =(1-musicCheck.ComputeAccuracy()) * 100;
+
+        Debug.Log("你的准度为"+accuracyRate + "%");
+
         //弹出UI
         uiManager.LevelSuccessUI();
     }

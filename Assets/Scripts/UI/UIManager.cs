@@ -150,7 +150,7 @@ public class UIManager
         UIBase backButton = new UIBase("BackButton");
         UIBase musicCheckUI = new UIBase("MusicCheckUI");
 
-        UIBase resetButton = new UIBase("ResetButton");
+        //UIBase resetButton = new UIBase("ResetButton");
 
         UIBase ShootUI = new UIBase("ShootUI");
         UIBase MouseUseUI = new UIBase("MouseUseUI");

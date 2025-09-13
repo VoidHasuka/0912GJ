@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -85,4 +86,13 @@ public class ButtonEvent : MonoBehaviour
     {
         GameManager.Instance.musicCheck.PlayPassword();
     }
+
+    public void OnClickEnterNextLevel()
+    {
+        GameManager.Instance.ChangeGameState(GameState.Level);
+        GameManager.Instance.ChangeGameState(GameState.Play);
+
+        GameManager.Instance.InitLevel(GameManager.Instance.currentLevelIndex);
+    }
+
 }

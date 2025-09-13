@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1617115440456354810}
   - component: {fileID: 8123257372935773161}
   - component: {fileID: 3110253264164234457}
+  - component: {fileID: 46232806875405975}
+  - component: {fileID: 5128110350423839956}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -37,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -833, y: -412}
-  m_SizeDelta: {x: 145, y: 209}
+  m_SizeDelta: {x: 144, y: 203}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &888385844838838701
 CanvasRenderer:
@@ -67,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cc79754330d17c04dbca72b47edaffb5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ab6e3876892377e439ca4e48fbefd46c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -145,3 +147,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed38ae8feda78e458a018fc75a8b185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &46232806875405975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241525859445988818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5128110350423839956}
+          m_TargetAssemblyTypeName: ButtonDownAndUp, Assembly-CSharp
+          m_MethodName: OnClickDown
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5128110350423839956}
+          m_TargetAssemblyTypeName: ButtonDownAndUp, Assembly-CSharp
+          m_MethodName: OnClickUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &5128110350423839956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241525859445988818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66633ca4392d38541b0d88d9e5c34f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  downImg: {fileID: 21300000, guid: fc00115d4f721c3438fbc08e773ca7c1, type: 3}
+  upImg: {fileID: 21300000, guid: ab6e3876892377e439ca4e48fbefd46c, type: 3}

@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EditMode: 0
-  faultToleranceTime: 0.2
+  faultToleranceTime: 0.3
 --- !u!222 &2180170885925008815
 CanvasRenderer:
   m_ObjectHideFlags: 0

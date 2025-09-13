@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class UIManager
 {
@@ -9,6 +10,8 @@ public class UIManager
     public Canvas uiCanvas;
 
     public MusicCheck musicCheck;
+
+    public GameObject cursorGo;
 
     public void Init()
     {
@@ -22,6 +25,11 @@ public class UIManager
         }
 
         uiList = new List<UIBase>();
+
+        //隐藏原有cursor
+        Cursor.visible = false;
+        //创建cursor，并设置为最高层级
+        cursorGo = GameObject.Instantiate(Resources.Load<GameObject>("UI/CursorUI"), uiCanvas.transform);    
     }
 
     private void ClearUIList()
@@ -90,6 +98,7 @@ public class UIManager
 
         UIBase resetButton = new UIBase("ResetButton");
 
+        UIBase ShootUI = new UIBase("ShootUI");
         UIBase MouseUseUI = new UIBase("MouseUseUI");
     }
 

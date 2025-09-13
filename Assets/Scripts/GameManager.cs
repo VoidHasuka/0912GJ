@@ -89,12 +89,18 @@ public class GameManager : MonoBehaviour
  
     private void Update()
     {
+        //更新cursor
+
+        uiManager.cursorGo.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 2);
+        uiManager.cursorGo.transform.SetAsLastSibling();
+
+
         if (currentState == GameState.Play)
         {
             //左键移动位置
             receiver.GetComponent<ReceiverMove>().ReceiverMoveByMouse();
             //右键启动所有声源
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonUp(1))
             {
                 //musicCheck.ClearPasswordUI();
                 //ClearPasswordUI

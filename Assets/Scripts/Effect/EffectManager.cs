@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class EffectManager
 {
+
+
+    
     public void Init()
     {
         //初始化特效管理器
@@ -35,5 +39,21 @@ public class EffectManager
         //{
         //    Object.Destroy(ps.gameObject, 0.05f);
         //});
+    }
+
+    //创建左键点击对应事件
+    private event Action<Vector2> OnMouse0Click;
+
+    //呼叫对应事件执行
+    public void CallOnMouse0Click(Vector2 vec)
+    {
+        OnMouse0Click?.Invoke(vec);
+    }
+
+    //创建右键点击对应事件
+    private event Action <Vector2> OnMouse1Click;
+    public void CallOnMouse1Click(Vector2 vec)
+    {
+        OnMouse1Click?.Invoke(vec);
     }
 }

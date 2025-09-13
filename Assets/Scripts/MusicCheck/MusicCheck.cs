@@ -11,6 +11,8 @@ public class MusicCheck : MonoBehaviour
     public bool EditMode = false; // 编辑模式开关
 
 
+    private int tryTimes = 0;
+
     public float faultToleranceTime = 0.2f; // 容错时间
     private float maxTime = 15f;             // 最大时间
     private float Timer = 0f;               //  计时器
@@ -33,6 +35,7 @@ public class MusicCheck : MonoBehaviour
     {
         //注册到GameManager中
         GameManager.Instance.musicCheck = this;
+        tryTimes = 0;
 
         //创建判定线
         phigrosLine = GameObject.Instantiate(Resources.Load<GameObject>("UI/PhigrosLine"), this.gameObject.transform);
@@ -138,6 +141,9 @@ public class MusicCheck : MonoBehaviour
     //接受输入并检查是否与密码器在允许范围内匹配
     public void ReceiveInputWithCheck(WaveType waveType)
     {
+
+        tryTimes++;
+
         //比对时间是否正确，若正确则加入输入器，absult为绝对正确时间
         if (passwordList == null) return;
         float absultTime = passwordList[inputIndex].time;
@@ -254,6 +260,28 @@ public class MusicCheck : MonoBehaviour
     {
         ClearInputUI();
         ClearPasswordUI();
+    }
+
+    public void PlayPassword()
+    {
+        allowTimerStart = true;
+
+        float delayTime = 0f;
+
+        for (int i = 0; i < passwordGoList.Count; i++)
+        {
+            int tmpIndex = i;
+            delayTime = passwordList[tmpIndex].time;
+            GameManager.Instance.InvokeAfterDelay(() =>
+            {
+                GameManager.Instance.audioManager.PlayWaveAudio(passwordList[tmpIndex].waveType);
+            }, delayTime);
+        }
+
+        GameManager.Instance.InvokeAfterDelay(() =>
+        {
+            ResetInput();
+        }, maxTime);
     }
 
 }

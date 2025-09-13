@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static WindowsUtil;
 
 public enum WaveType
 {
@@ -88,7 +89,7 @@ public class GameManager : MonoBehaviour
         if (currentState == GameState.Play)
         {
             //左键移动位置
-
+            receiver.GetComponent<ReceiverMove>().ReceiverMoveByMouse();
             //右键启动所有声源
             if (Input.GetMouseButtonDown(1))
             {
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour
                 soundSourceManager.DeleteAllWave();
                 musicCheck.ResetInput();
                 soundSourceManager.EmitAll();
+
             }
         }
     }

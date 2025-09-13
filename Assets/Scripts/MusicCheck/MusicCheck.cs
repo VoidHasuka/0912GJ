@@ -37,7 +37,7 @@ public class MusicCheck : MonoBehaviour
         //创建判定线
         phigrosLine = GameObject.Instantiate(Resources.Load<GameObject>("UI/PhigrosLine"), this.gameObject.transform);
         //位置设定
-        phigrosLine.transform.localPosition = new Vector3(-400, 0, 0);
+        phigrosLine.transform.localPosition = new Vector3(-400, phigrosLine.transform.localPosition.y, phigrosLine.transform.localPosition.z);
     }
 
     //计时
@@ -50,7 +50,7 @@ public class MusicCheck : MonoBehaviour
         {
             Timer += Time.deltaTime;
             //更新判定线
-            phigrosLine.transform.localPosition = new Vector3(-400 + Timer / maxTime * 800, 0, 0);
+            phigrosLine.transform.localPosition = new Vector3(-400 + Timer / maxTime * 800, phigrosLine.transform.localPosition.y, phigrosLine.transform.localPosition.z);
         }
 
         //if (Timer > maxTime)
@@ -103,7 +103,7 @@ public class MusicCheck : MonoBehaviour
             var Go = GameObject.Instantiate(Resources.Load<GameObject>("UI/word" + passwordList[i].waveType), parentTf);
             Color oldColor = Go.GetComponent<Image>().color;
             Go.GetComponent<Image>().color = new Color(oldColor.r, oldColor.g, oldColor.b, 0.3f);
-            Go.transform.localPosition = new Vector3(-400+passwordList[i].time/maxTime*800, 0, 0);
+            Go.transform.localPosition = new Vector3(-400+passwordList[i].time/maxTime*800, Go.transform.localPosition.y, Go.transform.localPosition.z);
             passwordGoList.Add(Go);
         }
     }
@@ -117,7 +117,7 @@ public class MusicCheck : MonoBehaviour
         allowTimerStart = false;
 
         //位置设定
-        phigrosLine.transform.localPosition = new Vector3(-400, 0, 0);
+        phigrosLine.transform.localPosition = new Vector3(-400, phigrosLine.transform.localPosition.y, phigrosLine.transform.localPosition.z);
     }
 
 
@@ -145,7 +145,7 @@ public class MusicCheck : MonoBehaviour
         //创建UI
         Transform parentTf = GameObject.Find("Input").transform;
         var Go = GameObject.Instantiate(Resources.Load<GameObject>("UI/word" + waveType), parentTf);
-        Go.transform.localPosition = new Vector3(-400 + Timer / maxTime * 800, 0, 0);
+        Go.transform.localPosition = new Vector3(-400 + Timer / maxTime * 800, Go.transform.localPosition.y, Go.transform.localPosition.z);
         Go.transform.localScale = new Vector3(1f, 0.6f, 1f);
         inputGoList.Add(Go);
 
@@ -201,7 +201,7 @@ public class MusicCheck : MonoBehaviour
         //创建UI
         Transform parentTf = GameObject.Find("Input").transform;
         var Go = GameObject.Instantiate(Resources.Load<GameObject>("UI/word" + waveType), parentTf);
-        Go.transform.localPosition = new Vector3(-400 + Timer / maxTime * 800, 0, 0);
+        Go.transform.localPosition = new Vector3(-400 + Timer / maxTime * 800, Go.transform.localPosition.y, Go.transform.localPosition.z);
         inputGoList.Add(Go);
     }
 

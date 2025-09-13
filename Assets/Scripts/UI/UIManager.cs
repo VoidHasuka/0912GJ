@@ -89,6 +89,8 @@ public class UIManager
         UIBase musicCheckUI = new UIBase("MusicCheckUI");
 
         UIBase resetButton = new UIBase("ResetButton");
+
+        UIBase MouseUseUI = new UIBase("MouseUseUI");
     }
 
     //返回确认UI

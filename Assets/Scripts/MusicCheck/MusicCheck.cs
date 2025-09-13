@@ -41,6 +41,7 @@ public class MusicCheck : MonoBehaviour
         phigrosLine = GameObject.Instantiate(Resources.Load<GameObject>("UI/PhigrosLine"), this.gameObject.transform);
         //位置设定
         phigrosLine.transform.localPosition = new Vector3(-400, phigrosLine.transform.localPosition.y, phigrosLine.transform.localPosition.z);
+
     }
 
     //计时
@@ -104,8 +105,7 @@ public class MusicCheck : MonoBehaviour
         for(int i=0;i< passwordList.Count;i++)
         {
             var Go = GameObject.Instantiate(Resources.Load<GameObject>("UI/word" + passwordList[i].waveType), parentTf);
-            Color oldColor = Go.GetComponent<Image>().color;
-            Go.GetComponent<Image>().color = new Color(oldColor.r, oldColor.g, oldColor.b, 0.3f);
+            Go.GetComponent<Judgeline>().SetTargetImg();
             Go.transform.localPosition = new Vector3(-400+passwordList[i].time/maxTime*800, Go.transform.localPosition.y, Go.transform.localPosition.z);
             passwordGoList.Add(Go);
         }
@@ -151,8 +151,8 @@ public class MusicCheck : MonoBehaviour
         //创建UI
         Transform parentTf = GameObject.Find("Input").transform;
         var Go = GameObject.Instantiate(Resources.Load<GameObject>("UI/word" + waveType), parentTf);
+        Go.GetComponent<Judgeline>().SetUseImg();
         Go.transform.localPosition = new Vector3(-400 + Timer / maxTime * 800, Go.transform.localPosition.y, Go.transform.localPosition.z);
-        Go.transform.localScale = new Vector3(1f, 0.6f, 1f);
         inputGoList.Add(Go);
 
         if (absultTime-faultToleranceTime/2 <= Timer && Timer <= absultTime + faultToleranceTime / 2)
@@ -207,6 +207,7 @@ public class MusicCheck : MonoBehaviour
         //创建UI
         Transform parentTf = GameObject.Find("Input").transform;
         var Go = GameObject.Instantiate(Resources.Load<GameObject>("UI/word" + waveType), parentTf);
+        Go.GetComponent<Judgeline>().SetTargetImg();
         Go.transform.localPosition = new Vector3(-400 + Timer / maxTime * 800, Go.transform.localPosition.y, Go.transform.localPosition.z);
         inputGoList.Add(Go);
     }
@@ -264,6 +265,8 @@ public class MusicCheck : MonoBehaviour
 
     public void PlayPassword()
     {
+        if(allowTimerStart) return;
+
         allowTimerStart = true;
 
         float delayTime = 0f;
@@ -275,12 +278,17 @@ public class MusicCheck : MonoBehaviour
             GameManager.Instance.InvokeAfterDelay(() =>
             {
                 GameManager.Instance.audioManager.PlayWaveAudio(passwordList[tmpIndex].waveType);
+                passwordGoList[tmpIndex].GetComponent<Judgeline>().SetShowImg();
             }, delayTime);
         }
 
         GameManager.Instance.InvokeAfterDelay(() =>
         {
             ResetInput();
+            foreach(var img in passwordGoList)
+            {
+                img.GetComponent<Judgeline>().SetTargetImg();
+            }
         }, maxTime);
     }
 

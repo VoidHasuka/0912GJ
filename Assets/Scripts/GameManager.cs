@@ -56,6 +56,10 @@ public class GameManager : MonoBehaviour
     public EffectManager effectManager;
     public AudioManager audioManager;
 
+    [Header("锁定移动")]
+    public bool lockMove = false;
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -105,7 +109,7 @@ public class GameManager : MonoBehaviour
                 //musicCheck.ClearPasswordUI();
                 //ClearPasswordUI
                 PlayAllSound();
-
+                lockMove = true;
             }
         }
     }

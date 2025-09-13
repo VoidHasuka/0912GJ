@@ -4905,7 +4905,7 @@ MonoBehaviour:
   passwordSO: {fileID: 11400000, guid: 87fbcbbd4ba2c0a41887fc4ff5144762, type: 2}
   currentState: 0
   currentLevelIndex: 0
-  lastLevelIndex: 7
+  lastLevelIndex: 0
   musicCheck: {fileID: 0}
   lockMove: 0
 --- !u!4 &944893666

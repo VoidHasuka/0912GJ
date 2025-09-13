@@ -84,6 +84,8 @@ public class ButtonEvent : MonoBehaviour
 
     public void OnClickPlayPasword()
     {
+        GameManager.Instance.musicCheck.ResetInput();
+        GameManager.Instance.soundSourceManager.DeleteAllWave();
         GameManager.Instance.musicCheck.PlayPassword();
     }
 

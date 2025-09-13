@@ -155,6 +155,14 @@ public class GameManager : MonoBehaviour
                 // 进入游戏玩法状态的逻辑
                 uiManager.BasicGameUI();
 
+                //一定间隔后启动PlayPassword
+                InvokeAfterDelay(() => {
+                    musicCheck.ResetInput();
+                    soundSourceManager.DeleteAllWave();
+                    musicCheck.PlayPassword();
+                },0.75f);
+                
+
                 break;
             case GameState.End:
 

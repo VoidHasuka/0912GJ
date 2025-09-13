@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class UIManager
 {
@@ -9,6 +10,8 @@ public class UIManager
     public Canvas uiCanvas;
 
     public MusicCheck musicCheck;
+
+    public GameObject cursorGo;
 
     public void Init()
     {
@@ -22,6 +25,11 @@ public class UIManager
         }
 
         uiList = new List<UIBase>();
+
+        //隐藏原有cursor
+        Cursor.visible = false;
+        //创建cursor，并设置为最高层级
+        cursorGo = GameObject.Instantiate(Resources.Load<GameObject>("UI/CursorUI"), uiCanvas.transform);    
     }
 
     private void ClearUIList()
@@ -72,10 +80,11 @@ public class UIManager
         UIBase level_2Button = new UIBase("Level_2Button");
         UIBase level_3Button = new UIBase("Level_3Button");
         UIBase level_4Button = new UIBase("Level_4Button");
-        //UIBase level_5Button = new UIBase("Level_5Button");
-        //UIBase level_6Button = new UIBase("Level_6Button");
-        //UIBase level_7Button = new UIBase("Level_7Button");
-        
+        UIBase level_5Button = new UIBase("Level_5Button");
+        UIBase level_6Button = new UIBase("Level_6Button");
+        UIBase level_7Button = new UIBase("Level_7Button");
+        UIBase level_8Button = new UIBase("Level_8Button");
+
     }
 
     //局内游戏UI
@@ -88,6 +97,9 @@ public class UIManager
         UIBase musicCheckUI = new UIBase("MusicCheckUI");
 
         UIBase resetButton = new UIBase("ResetButton");
+
+        UIBase ShootUI = new UIBase("ShootUI");
+        UIBase MouseUseUI = new UIBase("MouseUseUI");
     }
 
     //返回确认UI

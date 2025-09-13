@@ -1,14 +1,15 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class ReceiverMove : MonoBehaviour
 {
-    public float moveSpeed = 5f;           // ÒÆ¶¯ËÙ¶È£¨µ¥Î»/Ãë£©
-    public Camera cam;                     // ÓÃÀ´×ª»»Êó±êµã»÷µÄÏà»ú
+    public float moveSpeed = 5f;           // ç§»åŠ¨é€Ÿåº¦ï¼ˆå•ä½/ç§’ï¼‰
+    public Camera cam;                     // ç”¨æ¥è½¬æ¢é¼ æ ‡ç‚¹å‡»çš„ç›¸æœº
 
     private Rigidbody2D rb;
-    private Vector2? targetPos;            // nullable£ºÈôÎª null ±íÊ¾Ä¿Ç°²»¶¯
+    private Vector3 targetPos;            // nullableï¼šè‹¥ä¸º null è¡¨ç¤ºç›®å‰ä¸åŠ¨
 
     void Awake()
     {
@@ -19,54 +20,61 @@ public class ReceiverMove : MonoBehaviour
 
     void Update()
     {
+        
+    }
+
+
+    public void ReceiverMoveByMouse()
+    {
         if (Input.GetMouseButtonDown(0))
         {
-            // ÅĞ¶ÏÊÇ·ñµã»÷ÔÚ UI ÔªËØÉÏ
+            // åˆ¤æ–­æ˜¯å¦ç‚¹å‡»åœ¨ UI å…ƒç´ ä¸Š
             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
             {
 
-                // µã»÷ÔÚ UI£¨°´Å¥»òÆäËû UI ÔªËØÉÏ£©£¬²»ÒÆ¶¯
+                // ç‚¹å‡»åœ¨ UIï¼ˆæŒ‰é’®æˆ–å…¶ä»– UI å…ƒç´ ä¸Šï¼‰ï¼Œä¸ç§»åŠ¨
                 return;
             }
 
             Vector3 mouseScreen = Input.mousePosition;
-            // z ²»¹Ü£¬ÒòÎªÊÇ 2D Õı½»Ïà»ú£¬ScreenToWorldPoint µÄ z »á±»ºöÂÔ£¨»òÕßÓÃÏà»úµÄ¾àÀë£©
+            // z ä¸ç®¡ï¼Œå› ä¸ºæ˜¯ 2D æ­£äº¤ç›¸æœºï¼ŒScreenToWorldPoint çš„ z ä¼šè¢«å¿½ç•¥ï¼ˆæˆ–è€…ç”¨ç›¸æœºçš„è·ç¦»ï¼‰
             Vector3 worldPos = cam.ScreenToWorldPoint(mouseScreen);
-            // Èç¹û¶ÔÏóÔÚÄ³¸ö z ²ã£¬±ÈÈç z=0£¬¾Í°ÑÄ¿±êµÄ z ÉèÎªÕâÒ»²ã
+            // å¦‚æœå¯¹è±¡åœ¨æŸä¸ª z å±‚ï¼Œæ¯”å¦‚ z=0ï¼Œå°±æŠŠç›®æ ‡çš„ z è®¾ä¸ºè¿™ä¸€å±‚
             worldPos.z = transform.position.z;
 
-            targetPos = new Vector2(worldPos.x, worldPos.y);
+            targetPos = new Vector3(worldPos.x, worldPos.y, worldPos.z = transform.position.z);
+            rb.gameObject.transform.DOMove(targetPos, 0.7f).SetEase(Ease.OutCubic);
         }
     }
 
     void FixedUpdate()
     {
-        if (!targetPos.HasValue)
-            return;
+        //if (!targetPos.HasValue)
+        //    return;
 
-        Vector2 currentPos = rb.position;
-        Vector2 destPos = targetPos.Value;
-        Vector2 dir = destPos - currentPos;
-        float dist = dir.magnitude;
+        //Vector2 currentPos = rb.position;
+        //Vector2 destPos = targetPos.Value;
+        //Vector2 dir = destPos - currentPos;
+        //float dist = dir.magnitude;
 
-        if (dist < 0.01f)
-        {
-            // ÒÑ¾­µ½´ï»ò·Ç³£½Ó½üÄ¿±ê£¬Í£Ö¹ÒÆ¶¯
-            targetPos = null;
-            rb.velocity = Vector2.zero;
-            return;
-        }
+        //if (dist < 0.01f)
+        //{
+        //    // å·²ç»åˆ°è¾¾æˆ–éå¸¸æ¥è¿‘ç›®æ ‡ï¼Œåœæ­¢ç§»åŠ¨
+        //    targetPos = null;
+        //    rb.velocity = Vector2.zero;
+        //    return;
+        //}
 
-        Vector2 moveStep = dir.normalized * moveSpeed * Time.fixedDeltaTime;
+        //Vector2 moveStep = dir.normalized * moveSpeed * Time.fixedDeltaTime;
 
-        // ·ÀÖ¹ overshoot£¨×ß¹ıÍ·£©
-        if (moveStep.sqrMagnitude >= dir.sqrMagnitude)
-        {
-            rb.MovePosition(destPos);
-        }
-        else
-        {
-            rb.MovePosition(currentPos + moveStep);
-        }
+        //// é˜²æ­¢ overshootï¼ˆèµ°è¿‡å¤´ï¼‰
+        //if (moveStep.sqrMagnitude >= dir.sqrMagnitude)
+        //{
+        //    rb.MovePosition(destPos);
+        //}
+        //else
+        //{
+        //    rb.MovePosition(currentPos + moveStep);
+        //}
     }
 }

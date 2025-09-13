@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static WindowsUtil;
 
 public enum WaveType
 {
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
     public SoundSourceManager soundSourceManager;
     public UIManager uiManager;
     public EffectManager effectManager;
+    public AudioManager audioManager;
 
     private void Awake()
     {
@@ -70,11 +72,13 @@ public class GameManager : MonoBehaviour
         soundSourceManager = new SoundSourceManager();
         uiManager = new UIManager();
         effectManager = new EffectManager();
+        audioManager = new AudioManager();
 
         //初始化管理器
         soundSourceManager.Init();
         uiManager.Init();
         effectManager.Init();
+        audioManager.Init();
     }
 
     private void Start()
@@ -82,18 +86,28 @@ public class GameManager : MonoBehaviour
         //启动时显示开始菜单UI
         ChangeGameState(GameState.Start);
     }
-
+ 
     private void Update()
     {
+        //更新cursor
+
+        uiManager.cursorGo.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 2);
+        uiManager.cursorGo.transform.SetAsLastSibling();
+
+
         if (currentState == GameState.Play)
         {
             //左键移动位置
-
+            receiver.GetComponent<ReceiverMove>().ReceiverMoveByMouse();
             //右键启动所有声源
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonUp(1))
             {
-                //musicCheck.ResetInput();
+                //musicCheck.ClearPasswordUI();
+                //ClearPasswordUI
+                soundSourceManager.DeleteAllWave();
+                musicCheck.ResetInput();
                 soundSourceManager.EmitAll();
+
             }
         }
     }
@@ -180,13 +194,18 @@ public class GameManager : MonoBehaviour
         {
             new Vector3(500,500,-10),
             new Vector3(1000,1000,-10),
-            new Vector3(1500,1500,-10)
+            new Vector3(1500,1500,-10),
+            new Vector3(2000,2000,-10),
+            new Vector3(2500,2500,-10),
+            new Vector3(3000,3000,-10),
+            new Vector3(3500,3500,-10),
+            new Vector3(4000,4000,-10)
         };
         if(index>=0 && index<cameraPositions.Count)
         {
             //位置更新
             Camera.main.transform.position = cameraPositions[index];
-            Vector3 offset = new Vector3(-1f, 1f, 0);
+            Vector3 offset = new Vector3(0, 0, 0);
             receiver.transform.position = new Vector3(cameraPositions[index].x, cameraPositions[index].y, 1) + offset;
         }
         else

@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class EffectManager
 {
+
+
+    
     public void Init()
     {
         //初始化特效管理器
@@ -16,24 +20,40 @@ public class EffectManager
     //播放音符正确特效
     public void PlayCheckRightEffect(Vector2 position, UnityEngine.Color color = default)
     {
-        var checkRightEffectGo = GameObject.Instantiate(Resources.Load<GameObject>("Effect/CheckRightEffect"));
-        checkRightEffectGo.transform.position = position;
+        //var checkRightEffectGo = GameObject.Instantiate(Resources.Load<GameObject>("Effect/CheckRightEffect"));
+        //checkRightEffectGo.transform.position = position;
 
-        ParticleSystem ps = checkRightEffectGo.GetComponent<ParticleSystem>();
-        if (ps != null)
-        {
-            var main = ps.main;
-            main.startColor = new ParticleSystem.MinMaxGradient(color);
-            ps.Play();
-        }
+        //ParticleSystem ps = checkRightEffectGo.GetComponent<ParticleSystem>();
+        //if (ps != null)
+        //{
+        //    var main = ps.main;
+        //    main.startColor = new ParticleSystem.MinMaxGradient(color);
+        //    ps.Play();
+        //}
 
-        var renderer = ps.GetComponent<ParticleSystemRenderer>();
-        Material mat = Object.Instantiate(renderer.material);
-        renderer.material = mat;
+        //var renderer = ps.GetComponent<ParticleSystemRenderer>();
+        //Material mat = Object.Instantiate(renderer.material);
+        //renderer.material = mat;
 
-        mat.DOFade(0f, 1.0f).From(1f).OnComplete(() =>
-        {
-            Object.Destroy(ps.gameObject, 0.05f);
-        });
+        //mat.DOFade(0f, 1.0f).From(1f).OnComplete(() =>
+        //{
+        //    Object.Destroy(ps.gameObject, 0.05f);
+        //});
+    }
+
+    //创建左键点击对应事件
+    private event Action<Vector2> OnMouse0Click;
+
+    //呼叫对应事件执行
+    public void CallOnMouse0Click(Vector2 vec)
+    {
+        OnMouse0Click?.Invoke(vec);
+    }
+
+    //创建右键点击对应事件
+    private event Action <Vector2> OnMouse1Click;
+    public void CallOnMouse1Click(Vector2 vec)
+    {
+        OnMouse1Click?.Invoke(vec);
     }
 }

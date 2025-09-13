@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -6429291142617909550}
   - component: {fileID: -8785154039801444463}
   m_Layer: 0
-  m_Name: wave
+  m_Name: wave2
   m_TagString: Wave
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -250,7 +250,7 @@ Animator:
   m_GameObject: {fileID: 5482585612339727930}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 409ea21fe54fdc24db37bcff7eba0e09, type: 2}
+  m_Controller: {fileID: 9100000, guid: 64c0a5ff3e94db942afb94553584c3a1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

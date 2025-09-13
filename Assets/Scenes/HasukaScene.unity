@@ -3422,7 +3422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itsLevelIndex: 6
-  itsWaveType: 0
+  itsWaveType: 2
   wavePrefab: {fileID: 5482585612339727930, guid: 283583a07d54fff4d91186f5b28b01ff, type: 3}
   startScale: 1
   expansionSpeed: 6

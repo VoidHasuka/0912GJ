@@ -35,7 +35,6 @@ public struct WaveAndTime
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public GameObject cursorEff;
 
 
     [Header("Game Settings")]
@@ -47,7 +46,7 @@ public class GameManager : MonoBehaviour
     [Header("Game State")]
     public GameState currentState;
     public int currentLevelIndex = 0;
-    public int lastLevelIndex = 0;
+    public int lastLevelIndex = 7;
     public MusicCheck musicCheck;
     private Receiver receiver;
 
@@ -104,8 +103,7 @@ public class GameManager : MonoBehaviour
         if (currentState == GameState.Play)
         {
             //左键移动位置
-            receiver.GetComponent<ReceiverMove>().ReceiverMoveByMouse();
-
+            receiver.GetComponent<ReceiverMove>()?.ReceiverMoveByMouse();
             //右键启动所有声源
             if (Input.GetMouseButtonUp(1))
             {
@@ -200,7 +198,9 @@ public class GameManager : MonoBehaviour
 
         if(index == 7)
         {
-            receiver.gameObject.GetComponent<ReceiverMove>().enabled = false;
+            Destroy(receiver.GetComponent<ReceiverMove>());
+
+            //receiver = GameObject.Find("")
 
         }
 
@@ -246,6 +246,12 @@ public class GameManager : MonoBehaviour
     public void LevelSuccess()
     {
         lastLevelIndex++;
+
+        //计算准度
+        float accuracyRate =(1-musicCheck.ComputeAccuracy()) * 100;
+
+        Debug.Log("你的准度为"+accuracyRate + "%");
+
         //弹出UI
         uiManager.LevelSuccessUI();
     }

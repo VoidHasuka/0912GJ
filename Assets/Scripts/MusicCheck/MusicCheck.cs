@@ -190,6 +190,20 @@ public class MusicCheck : MonoBehaviour
 
     }
 
+
+    //计算准度并返回非百分数
+    public float ComputeAccuracy()
+    {
+        float result = 0f;
+        for (int i = 0; i < inputList.Count; i++)
+        {
+            int tmpValue = i;
+            result += (Mathf.Abs(inputList[tmpValue].time - passwordList[tmpValue].time)) / maxTime;
+        }
+        return result;
+
+    }
+
     //接受输入但不与密码器对比，编辑模式使用
     public void ReceiveInputWithoutCheck(WaveType waveType)
     {

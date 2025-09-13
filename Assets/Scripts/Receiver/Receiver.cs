@@ -29,6 +29,8 @@ public class Receiver : MonoBehaviour
                 //sr.color = triggeredColor;
                 //// 短暂延时后恢复原色
                 //Invoke(nameof(ResetColor), 0.5f);
+
+                sr.transform.GetComponent<Animator>().Play("ReceLing",0,0f);
             }
 
             // 检测到是接收器

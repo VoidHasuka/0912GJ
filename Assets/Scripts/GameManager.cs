@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         //启动时显示开始菜单UI
         ChangeGameState(GameState.Start);
     }
-
+ 
     private void Update()
     {
         if (currentState == GameState.Play)
@@ -92,7 +92,10 @@ public class GameManager : MonoBehaviour
             //右键启动所有声源
             if (Input.GetMouseButtonDown(1))
             {
-                //musicCheck.ResetInput();
+                //musicCheck.ClearPasswordUI();
+                //ClearPasswordUI
+                soundSourceManager.DeleteAllWave();
+                musicCheck.ResetInput();
                 soundSourceManager.EmitAll();
             }
         }
@@ -180,13 +183,18 @@ public class GameManager : MonoBehaviour
         {
             new Vector3(500,500,-10),
             new Vector3(1000,1000,-10),
-            new Vector3(1500,1500,-10)
+            new Vector3(1500,1500,-10),
+            new Vector3(2000,2000,-10),
+            new Vector3(2500,2500,-10),
+            new Vector3(3000,3000,-10),
+            new Vector3(3500,3500,-10),
+            new Vector3(4000,4000,-10)
         };
         if(index>=0 && index<cameraPositions.Count)
         {
             //位置更新
             Camera.main.transform.position = cameraPositions[index];
-            Vector3 offset = new Vector3(-1f, 1f, 0);
+            Vector3 offset = new Vector3(0, 0, 0);
             receiver.transform.position = new Vector3(cameraPositions[index].x, cameraPositions[index].y, 1) + offset;
         }
         else

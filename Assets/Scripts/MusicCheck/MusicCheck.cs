@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -145,6 +146,7 @@ public class MusicCheck : MonoBehaviour
         Transform parentTf = GameObject.Find("Input").transform;
         var Go = GameObject.Instantiate(Resources.Load<GameObject>("UI/word" + waveType), parentTf);
         Go.transform.localPosition = new Vector3(-400 + Timer / maxTime * 800, 0, 0);
+        Go.transform.localScale = new Vector3(1f, 0.6f, 1f);
         inputGoList.Add(Go);
 
         if (absultTime-faultToleranceTime/2 <= Timer && Timer <= absultTime + faultToleranceTime / 2)

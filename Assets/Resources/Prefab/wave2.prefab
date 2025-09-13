@@ -17,6 +17,10 @@ GameObject:
   - component: {fileID: 709370293307394091}
   - component: {fileID: -6429291142617909550}
   - component: {fileID: -8785154039801444463}
+<<<<<<< HEAD
+=======
+  - component: {fileID: 6199459749957635087}
+>>>>>>> main
   m_Layer: 0
   m_Name: wave2
   m_TagString: Wave
@@ -296,3 +300,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.48
+<<<<<<< HEAD
+=======
+--- !u!114 &6199459749957635087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5482585612339727930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentShaderType: 0
+  normalStrength: 5
+  normalSmoothing: 1
+  computingNormal: 0
+>>>>>>> main

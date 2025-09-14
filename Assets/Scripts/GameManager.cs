@@ -280,6 +280,11 @@ public class GameManager : MonoBehaviour
 
         //弹出UI
         uiManager.LevelSuccessUI(text);
+
+        //生成切关特效
+        GameObject Go = GameObject.Instantiate(Resources.Load("Prefab/SuccessEffect")) as GameObject;
+        Go.transform.position = Camera.main.transform.position;
+
     }
 
     public void EnterNextLevel()

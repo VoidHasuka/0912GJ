@@ -281,14 +281,20 @@ public class GameManager : MonoBehaviour
         //弹出UI
         uiManager.LevelSuccessUI(text);
 
-        //生成切关特效
-        GameObject Go = GameObject.Instantiate(Resources.Load("Prefab/SuccessEffect")) as GameObject;
-        Go.transform.position = Camera.main.transform.position;
+       if(currentLevelIndex < 7)
+        {
+            //生成切关特效
+            GameObject Go = GameObject.Instantiate(Resources.Load("Prefab/SuccessEffect")) as GameObject;
+            Go.transform.position = Camera.main.transform.position;
+        }
 
         if(currentLevelIndex == 7)
         {
             //结束游戏
-            ChangeGameState(GameState.End);
+            InvokeAfterDelay(() =>
+            {
+                ChangeGameState(GameState.End);
+            }, 1f);
         }
 
     }

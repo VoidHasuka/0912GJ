@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 169948348735537261}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 87.61, y: 87.61, z: 87.61}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4541553867490968764}
@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10000, y: 10000}
+  m_SizeDelta: {x: 4000, y: 4000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &745583074882025045
 CanvasRenderer:
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -120,8 +120,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4194940176132959342}
-  - component: {fileID: 3571488459225229802}
-  - component: {fileID: 3295091762296695489}
+  - component: {fileID: 6185974213904864327}
+  - component: {fileID: 2950278238160741011}
   m_Layer: 0
   m_Name: SuccessEffect
   m_TagString: Untagged
@@ -146,7 +146,7 @@ Transform:
   - {fileID: 3557836829035890258}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &3571488459225229802
+--- !u!95 &6185974213904864327
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -167,7 +167,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3295091762296695489
+--- !u!114 &2950278238160741011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,7 +207,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 15}
+  m_LocalScale: {x: 15.01, y: 15.01, z: 15.01}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4654385095299140573}

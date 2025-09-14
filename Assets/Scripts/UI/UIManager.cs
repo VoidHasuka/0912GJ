@@ -80,7 +80,7 @@ public class UIManager
         }
 
         //SelectBGUI位置 重置
-        selectBGUI.transform.localPosition = new Vector3(840f, 0f, 0f);
+        selectBGUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(1826f, 0);
     }
 
     //关卡菜单UI
@@ -143,7 +143,7 @@ public class UIManager
             {
                 ui.uiGo.transform.SetParent(parent.transform, false);
             }
-            parent.transform.DOLocalMoveX(-1920f, 1.5f).From(0f,true);
+            parent.transform.DOLocalMoveX(-uiCanvas.gameObject.GetComponent<RectTransform>().rect.width, 1.5f).From(0f,true);
 
             selectBGUI.transform.DOLocalMoveX(-800f, 1f).From(840f,true);
         }

@@ -171,7 +171,7 @@ public class GameManager : MonoBehaviour
                 InvokeAfterDelay(() =>
                 {
                     lockMove = false;
-                }, 5f);
+                }, 5.5f);
 
 
                 break;
@@ -180,6 +180,11 @@ public class GameManager : MonoBehaviour
                 // 进入游戏结束状态的逻辑
                 GameManager.Instance.uiManager.ClearUIList();
                 var EndCanvas = GameObject.Instantiate(Resources.Load<GameObject>("UI/End"));
+                InvokeAfterDelay(() =>
+                {
+                    uiManager.Init();
+                    ChangeGameState(GameState.Start);
+                }, 5.3f);
 
                 break;
             default:

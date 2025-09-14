@@ -80,7 +80,7 @@ public class UIManager
         }
 
         //SelectBGUI位置 重置
-        selectBGUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(1826f, 0);
+        selectBGUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(1802f, 0);
     }
 
     //关卡菜单UI
@@ -166,6 +166,9 @@ public class UIManager
         //加入parent
         targetUI.uiGo.transform.SetParent(parent.transform,false);
         targetUI.uiGo.transform.position = levelButtonList[GameManager.Instance.currentLevelIndex].uiGo.transform.position;
+
+        //实例化UIMOVE按钮
+        UIBase UIMoveButton = new UIBase("UIMoveButton");
     }
 
     //局内游戏UI

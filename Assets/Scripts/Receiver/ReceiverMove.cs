@@ -12,7 +12,7 @@ public class ReceiverMove : MonoBehaviour
     private Vector3 targetPos;            // nullable：若为 null 表示目前不动
 
     private float Timer = 0f;
-    private float lockTime = 1f;  // 每次右键后锁定一段时间
+    private float lockTime = 2f;  // 每次右键后锁定一段时间
 
     void Awake()
     {

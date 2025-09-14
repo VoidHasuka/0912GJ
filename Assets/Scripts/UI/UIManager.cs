@@ -80,7 +80,7 @@ public class UIManager
         }
 
         //SelectBGUI位置 重置
-        selectBGUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(1826f, 0);
+        selectBGUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(1802f, 0);
     }
 
     //关卡菜单UI

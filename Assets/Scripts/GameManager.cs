@@ -102,16 +102,19 @@ public class GameManager : MonoBehaviour
 
         if (currentState == GameState.Play)
         {
-            //左键移动位置
-            receiver.GetComponent<ReceiverMove>()?.ReceiverMoveByMouse();
-            if(souceMove!=null)souceMove.ReceiverMoveByMouse();
-            //右键启动所有声源
-            if (Input.GetMouseButtonUp(1))
+            if (!lockMove)
             {
-                //musicCheck.ClearPasswordUI();
-                //ClearPasswordUI
-                PlayAllSound();
-                lockMove = true;
+                //左键移动位置
+                receiver.GetComponent<ReceiverMove>()?.ReceiverMoveByMouse();
+                if (souceMove != null) souceMove.ReceiverMoveByMouse();
+                //右键启动所有声源
+                if (Input.GetMouseButtonUp(1))
+                {
+                    //musicCheck.ClearPasswordUI();
+                    //ClearPasswordUI
+                    PlayAllSound();
+                    lockMove = true;
+                }
             }
         }
     }
@@ -155,13 +158,22 @@ public class GameManager : MonoBehaviour
                 // 进入游戏玩法状态的逻辑
                 uiManager.BasicGameUI();
 
+                //锁定Move
+                lockMove = true;
+
                 //一定间隔后启动PlayPassword
                 InvokeAfterDelay(() => {
                     musicCheck.ResetInput();
                     soundSourceManager.DeleteAllWave();
-                    musicCheck.PlayPassword();
+                    musicCheck.PlayPassword();               
                 },0.75f);
-                
+
+                //一定间隔后解锁Move
+                InvokeAfterDelay(() =>
+                {
+                    lockMove = false;
+                }, 2f);
+
 
                 break;
             case GameState.End:
@@ -181,10 +193,6 @@ public class GameManager : MonoBehaviour
     {
 
         SwitchCameraPosition(index);
-
-
-
-
 
         currentLevelIndex = index;
 
@@ -276,6 +284,11 @@ public class GameManager : MonoBehaviour
 
     public void EnterNextLevel()
     {
+
+        //生成切关特效
+
+        GameObject Go = GameObject.Instantiate(Resources.Load("Prefab/SuccessEffect")) as GameObject;
+        Go.transform.position = Camera.main.transform.position;
 
         ChangeGameState(GameState.Level);
 

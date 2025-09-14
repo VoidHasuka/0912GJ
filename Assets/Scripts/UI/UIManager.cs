@@ -44,7 +44,7 @@ public class UIManager
         selectBGUI.transform.SetAsFirstSibling();
     }
 
-    private void ClearUIList()
+    public void ClearUIList()
     {
         foreach(var ui in uiList)
         {

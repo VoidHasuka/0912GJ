@@ -18,6 +18,8 @@ public class UIManager
     public GameObject parent;
     public GameObject selectBGUI;
 
+    private GameObject spineGo;
+
     public void Init()
     {
         if(!GameObject.Find("UICanvas"))
@@ -32,7 +34,7 @@ public class UIManager
         uiList = new List<UIBase>();
 
         //隐藏原有cursor
-        Cursor.visible = false;
+        //Cursor.visible = false;
         //创建cursor，并设置为最高层级
         cursorGo = GameObject.Instantiate(Resources.Load<GameObject>("UI/CursorUI"), uiCanvas.transform);    
 
@@ -61,10 +63,19 @@ public class UIManager
     //开始菜单UI
     public void StartMenuUI()
     {
+
+        //Canvas更新为Camera
+        uiCanvas.renderMode = RenderMode.ScreenSpaceCamera;
+        //生成spine
+        spineGo = GameObject.Instantiate(Resources.Load<GameObject>("Prefab/Spine"));
+
+        
+
         ClearUIList();
 
         //实例化开始菜单UI
         UIBase startButton = new UIBase("StartButton");
+        
 
         // 获取RectTransform
         RectTransform rect = startButton.uiGo.GetComponent<RectTransform>();
@@ -81,11 +92,21 @@ public class UIManager
 
         //SelectBGUI位置 重置
         selectBGUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(1802f, 0);
+
+        //实例化其余开始界面UI
+        UIBase startUI = new UIBase("StartMenuUI");
     }
 
     //关卡菜单UI
     public void LevelMenuUI()
     {
+
+        Cursor.visible = false;
+
+        //Canvas更新为Overlap
+        uiCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        //删除spine
+        GameObject.Destroy(spineGo);
 
         bool existStartUI = false;
         foreach (var ui in uiList)
@@ -99,8 +120,19 @@ public class UIManager
                 ui.uiGo.GetComponent<Image>().DOColor(new Color(1f, 1f, 1f,0f), 1f).OnComplete(() => { ui.Destroy(); });
                 break;
             }
+
         }
-        if (!existStartUI)
+        foreach (var ui in uiList)
+        {
+            if (ui.uiGo.name == "StartMenuUI(Clone)")
+            {
+                uiList.Remove(ui);
+                ui.Destroy();
+                break;
+            }
+
+        }
+            if (!existStartUI)
         {
             ClearUIList();
         }

@@ -4333,8 +4333,8 @@ Canvas:
   m_GameObject: {fileID: 682575775}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1205803064}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -6348,7 +6348,7 @@ MonoBehaviour:
   passwordSO: {fileID: 11400000, guid: 87fbcbbd4ba2c0a41887fc4ff5144762, type: 2}
   currentState: 0
   currentLevelIndex: 0
-  lastLevelIndex: 7
+  lastLevelIndex: 0
   musicCheck: {fileID: 0}
   lockMove: 0
 --- !u!4 &944893666
@@ -8440,6 +8440,7 @@ GameObject:
   - component: {fileID: 1205803065}
   - component: {fileID: 1205803064}
   - component: {fileID: 1205803063}
+  - component: {fileID: 1205803066}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8521,6 +8522,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1205803066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205803062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2493fe875811840bc2e750c00a5617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldTarget: {fileID: 0}
+  uiIcon: {fileID: 0}
+  canvas: {fileID: 682575778}
+  uiOffset: {x: 0, y: 0}
+  hideWhenBehindCamera: 1
 --- !u!1 &1210921017
 GameObject:
   m_ObjectHideFlags: 0

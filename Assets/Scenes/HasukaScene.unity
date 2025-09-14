@@ -8918,6 +8918,7 @@ GameObject:
   - component: {fileID: 1205803064}
   - component: {fileID: 1205803063}
   - component: {fileID: 1205803066}
+  - component: {fileID: 1205803067}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9016,6 +9017,18 @@ MonoBehaviour:
   canvas: {fileID: 682575778}
   uiOffset: {x: 0, y: 0}
   hideWhenBehindCamera: 1
+--- !u!114 &1205803067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205803062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e2b11846d291d49b7e75e2ba2cb86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1210921017
 GameObject:
   m_ObjectHideFlags: 0

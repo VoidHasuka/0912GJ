@@ -1,0 +1,43 @@
+封面.png
+size:1837,1013
+filter:Linear,Linear
+pma:true
+图层 12
+bounds:264,920,91,179
+rotate:90
+图层 13
+bounds:127,958,62,53
+图层 14
+bounds:69,963,48,56
+rotate:90
+图层 15
+bounds:191,951,71,60
+图层 16
+bounds:2,971,40,65
+rotate:90
+图层 4
+bounds:670,2,1165,1009
+图层 5
+bounds:445,813,198,223
+rotate:90
+
+封面_2.png
+size:1926,1086
+filter:Linear,Linear
+pma:true
+图层 3
+bounds:2,2,1922,1082
+
+封面_3.png
+size:1938,1934
+filter:Linear,Linear
+pma:true
+图层 9
+bounds:2,2,1934,1930
+
+封面_4.png
+size:2004,2021
+filter:Linear,Linear
+pma:true
+图层 10
+bounds:2,2,2000,2017

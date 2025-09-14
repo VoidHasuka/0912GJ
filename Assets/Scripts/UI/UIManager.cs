@@ -63,7 +63,7 @@ public class UIManager
     //开始菜单UI
     public void StartMenuUI()
     {
-
+        Cursor.visible = true;
         //Canvas更新为Camera
         uiCanvas.renderMode = RenderMode.ScreenSpaceCamera;
         //生成spine
